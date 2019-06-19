@@ -1,12 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import { LocaleProvider } from 'antd';
+import 'antd/dist/antd.css';
+import zhCN from 'antd/lib/locale-provider/zh_CN';
+import moment from 'moment';
+import 'moment/locale/zh-cn';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import 'whatwg-fetch';
+import App from './pages/app';
+import store from './store';
+import './style/index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+moment.locale('zh-cn');
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <LocaleProvider locale={zhCN}>
+    <Provider store={store}>
+      <Router>
+        <Switch>
+          <Route path="/" component={App} />
+        </Switch>
+      </Router>
+    </Provider>
+  </LocaleProvider>,
+  document.getElementById('root'),
+);
