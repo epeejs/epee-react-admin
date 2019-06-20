@@ -1,15 +1,15 @@
 import { LocaleProvider } from 'antd';
 import 'antd/dist/antd.css';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
+import { ConnectedRouter } from 'connected-react-router';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import 'whatwg-fetch';
+import { Route, Switch } from 'react-router-dom';
 import App from './pages/app';
-import store from './store';
+import store, { history } from './store';
 import './style/index.css';
 
 moment.locale('zh-cn');
@@ -17,11 +17,11 @@ moment.locale('zh-cn');
 ReactDOM.render(
   <LocaleProvider locale={zhCN}>
     <Provider store={store}>
-      <Router>
+      <ConnectedRouter history={history}>
         <Switch>
           <Route path="/" component={App} />
         </Switch>
-      </Router>
+      </ConnectedRouter>
     </Provider>
   </LocaleProvider>,
   document.getElementById('root'),

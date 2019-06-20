@@ -12,6 +12,7 @@
     "@types/react-router-dom": "^4.3.4",
     "@types/redux-logger": "^3.0.7",
     "antd": "^3.19.6",
+    "connected-react-router": "^6.4.0",
     "husky": "^2.4.1",
     "lint-staged": "^8.2.1",
     "lodash": "^4.17.11",

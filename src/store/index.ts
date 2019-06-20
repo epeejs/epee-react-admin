@@ -1,5 +1,7 @@
 import { config } from 'config';
-import reducer from 'reducer';
+import { routerMiddleware } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
+import createRootReducer from 'reducer';
 import { applyMiddleware, createStore, Middleware } from 'redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
@@ -10,6 +12,11 @@ if (process.env.NODE_ENV === 'development' || config.debug) {
   middlewares.push(logger);
 }
 
-const store = createStore(reducer, applyMiddleware(...middlewares));
+export const history = createBrowserHistory();
+
+const store = createStore(
+  createRootReducer(history),
+  applyMiddleware(routerMiddleware(history), ...middlewares),
+);
 
 export default store;
