@@ -27,6 +27,11 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "stylelint": "^10.1.0",
+    "stylelint-config-css-modules": "^1.4.0",
+    "stylelint-config-prettier": "^5.2.0",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^18.3.0",
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
@@ -37,7 +42,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx"
   },
   "husky": {
     "hooks": {
@@ -45,11 +51,15 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "tslint --fix",
+    "**/*.{scss,less,css}": [
+      "stylelint --fix",
       "git add"
     ],
-    "**/*.{json,ts,tsx,js,md,scss,less,css,html}": [
+    "src/**/*.{ts,tsx}": [
+      "eslint --ext .js,.jsx,.ts,.tsx ",
+      "git add"
+    ],
+    "**/*.{json,ts,tsx,js,jsx,md,scss,less,css,html}": [
       "prettier --write",
       "git add"
     ]

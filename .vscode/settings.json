@@ -4,5 +4,6 @@
     "source.organizeImports": true
   },
   "editor.formatOnSave": true,
-  "tslint.alwaysShowRuleFailuresAsWarnings": false
+  "tslint.alwaysShowRuleFailuresAsWarnings": false,
+  "prettier.stylelintIntegration": true
 }
