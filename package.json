@@ -54,8 +54,8 @@
       "stylelint --fix",
       "git add"
     ],
-    "src/**/*.{ts,tsx}": [
-      "tslint --fix",
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
       "git add"
     ],
     "**/*.{json,ts,tsx,js,jsx,md,scss,less,css,html}": [

@@ -1,0 +1,19 @@
+{
+  "extends": ["react-app", "eslint:recommended"],
+  "rules": {
+    "prefer-const": "error",
+    "no-empty-function": "error",
+    "lines-between-class-members": "warn",
+    "import/order": "warn",
+    "react/no-unsafe": ["error", { "checkAliases": true }],
+    "react/jsx-no-bind": [
+      "error",
+      {
+        "ignoreDOMComponents": true,
+        "ignoreRefs": true,
+        "allowBind": true
+      }
+    ],
+    "react/sort-comp": "error"
+  }
+}

@@ -21,13 +21,11 @@ async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
   let url = path;
 
   if (router) {
-    url = path.replace(/:([A-Za-z]+)/g, function(substring, p1: string) {
-      return router[p1];
-    });
+    url = path.replace(/:([A-Za-z]+)/g, (substring, p1: string) => router[p1]);
   }
   if (params) {
     url += _(
-      _.reduce(params, (prev, val, key) => (prev += `${key}=${val}&`), '?'),
+      _.reduce(params, (prev, val, key) => `${prev}${key}=${val}&`, '?'),
     ).trimEnd('&');
   }
 
@@ -51,12 +49,10 @@ async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
     if (response.ok) {
       if (request.interceptors.response) {
         return await request.interceptors.response(response);
-      } else {
-        return await response.json();
       }
-    } else {
-      throw response;
+      return await response.json();
     }
+    throw response;
   } catch (error) {
     if (request.interceptors.catch) {
       request.interceptors.catch(error);
