@@ -10,7 +10,7 @@ yarn start
 > 为了更好的开发体验，你还需要安装以下 VSCode 插件
 >
 > - **Prettier - Code formatter**
-> - **TSLint** (作者 Microsoft)
+> - **ESLint**
 >
 > 推荐安装
 >
