@@ -1,6 +1,16 @@
 {
-  "extends": ["react-app", "eslint:recommended"],
+  "extends": "plugin:react/recommended",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "plugins": ["@typescript-eslint", "react", "import"],
   "rules": {
+    "no-console": "error",
     "prefer-const": "error",
     "no-empty-function": "error",
     "lines-between-class-members": "warn",
@@ -14,6 +24,8 @@
         "allowBind": true
       }
     ],
-    "react/sort-comp": "error"
+    "react/sort-comp": "error",
+    "react/self-closing-comp": "error",
+    "@typescript-eslint/no-useless-constructor": "error"
   }
 }
