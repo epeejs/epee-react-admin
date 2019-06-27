@@ -1,4 +1,3 @@
-import { config } from 'config';
 import { routerMiddleware } from 'connected-react-router';
 import { createBrowserHistory } from 'history';
 import createRootReducer from 'reducer';
@@ -8,7 +7,7 @@ import thunk from 'redux-thunk';
 
 const middlewares: Middleware[] = [thunk];
 
-if (process.env.NODE_ENV === 'development' || config.debug) {
+if (process.env.NODE_ENV === 'development' || window.config.debug) {
   middlewares.push(logger);
 }
 

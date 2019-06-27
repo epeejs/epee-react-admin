@@ -1,3 +1,11 @@
+declare interface Window {
+  config: {
+    version: string;
+    systemName: string;
+    debug: boolean;
+  };
+}
+
 declare interface IResponseBody<T> {
   code: number;
   data: T;

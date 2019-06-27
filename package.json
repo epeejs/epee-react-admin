@@ -42,8 +42,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx"
+    "eject": "react-scripts eject"
   },
   "husky": {
     "hooks": {
@@ -56,7 +55,7 @@
       "git add"
     ],
     "src/**/*.{ts,tsx}": [
-      "eslint --ext .js,.jsx,.ts,.tsx ",
+      "tslint --fix",
       "git add"
     ],
     "**/*.{json,ts,tsx,js,jsx,md,scss,less,css,html}": [
