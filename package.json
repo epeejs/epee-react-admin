@@ -32,6 +32,7 @@
     "stylelint-config-prettier": "^5.2.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^18.3.0",
+    "stylelint-order": "^3.0.0",
     "typescript": "^3.4.5",
     "whatwg-fetch": "^3.0.0"
   },
