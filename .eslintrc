@@ -1,0 +1,59 @@
+{
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jest": true,
+    "node": true
+  },
+  "plugins": ["@typescript-eslint", "react", "import"],
+  "rules": {
+    "import/order": "warn",
+    "react/no-unsafe": ["error", { "checkAliases": true }],
+    "react/jsx-no-bind": [
+      "error",
+      {
+        "ignoreDOMComponents": true,
+        "ignoreRefs": true,
+        "allowBind": true
+      }
+    ],
+    "react/sort-comp": "error",
+    "react/self-closing-comp": "error",
+    "@typescript-eslint/no-useless-constructor": "error",
+    "@typescript-eslint/array-type": "error",
+    "@typescript-eslint/ban-types": "error",
+    "@typescript-eslint/no-empty-interface": "error",
+    "@typescript-eslint/no-array-constructor": "error",
+    "@typescript-eslint/camelcase": "error",
+    "@typescript-eslint/class-name-casing": "error",
+    "getter-return": "off",
+    "no-dupe-args": "off",
+    "no-dupe-keys": "off",
+    "no-unreachable": "off",
+    "valid-typeof": "off",
+    "no-const-assign": "off",
+    "no-new-symbol": "off",
+    "no-this-before-super": "off",
+    "no-undef": "off",
+    "no-dupe-class-members": "off",
+    "no-redeclare": "off",
+    "no-unused-vars": "off",
+    "no-var": "error",
+    "prefer-rest-params": "error",
+    "prefer-spread": "error",
+    "no-console": "error",
+    "prefer-const": "error",
+    "no-empty-function": "error",
+    "lines-between-class-members": "warn"
+  }
+}

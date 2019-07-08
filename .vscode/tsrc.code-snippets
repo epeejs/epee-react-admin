@@ -1,0 +1,116 @@
+{
+  // Place your IFaceClientWeb workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "reducer": {
+    "scope": "typescript",
+    "prefix": "tsreducer",
+    "body": [
+      "import ActionTypes, { IActionParam } from 'constants/ActionTypes';",
+      "",
+      "export interface ${1:IApp}State {",
+      "  [key: string]: any;",
+      "}",
+      "",
+      "const initState: ${1:IApp}State = {};",
+      "",
+      "function ${2:app}(state = initState, { type, payload }: IActionParam): ${1:IApp}State {",
+      "  switch (type) {",
+      "    case ActionTypes:",
+      "      return { ...state, key: payload };",
+      "",
+      "    default:",
+      "      return state;",
+      "  }",
+      "}",
+      "",
+      "export default ${2:app};"
+    ]
+  },
+  "action": {
+    "scope": "typescript",
+    "prefix": "tsaction",
+    "body": [
+      "import ActionTypes, { IValueDispatch } from 'constants/ActionTypes';",
+      "",
+      "export const ${1:functionName} = () => (dispatch: IValueDispatch) => {",
+      "  dispatch({",
+      "    type: ActionTypes,",
+      "  });",
+      "};"
+    ]
+  },
+  "request": {
+    "scope": "typescript",
+    "prefix": "tsreq",
+    "body": [
+      "import Api from 'constants/Api';",
+      "import request from 'utils/request';",
+      "",
+      "export const ${1:functionName} = () =>",
+      "  request<IResponseBody<[]>>(Api);"
+    ]
+  },
+  "ts redux map": {
+    "scope": "typescriptreact",
+    "prefix": "tsrdxmap",
+    "body": [
+      "import { IReduxState } from 'reducer';",
+      "",
+      "const mapStateToProps = ({ $1 }: IReduxState) => ({});",
+      "const mapDispatchToProps = {};"
+    ]
+  },
+  "ts react component": {
+    "scope": "typescriptreact",
+    "prefix": "tsrcc",
+    "body": [
+      "import * as React from 'react';",
+      "import styles from '../style/${1:App}.module.scss';",
+      "",
+      "interface ${1:App}Props {",
+      "  [key: string]: any;",
+      "}",
+      "",
+      "class ${1:App} extends React.Component<${1:App}Props, any> {",
+      "  render() {",
+      "    return (",
+      "      <div>",
+      "         $2",
+      "      </div>",
+      "    );",
+      "  }",
+      "}",
+      "",
+      "export default ${1:App};"
+    ]
+  },
+  "const {} = object": {
+    "scope": "typescriptreact,typescript,javascript",
+    "prefix": "co",
+    "body": ["const { $2 } = ${1:object};"]
+  },
+  "const [] = array": {
+    "scope": "typescriptreact,typescript,javascript",
+    "prefix": "ca",
+    "body": ["const [ $2 ] = ${1:array};"]
+  },
+  "export inteface": {
+    "scope": "typescriptreact,typescript",
+    "prefix": "ei",
+    "body": ["export interface ${1:IApp} {", "  $2", "}"]
+  }
+}
