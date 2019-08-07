@@ -18,6 +18,9 @@ async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
     headers: { ...request.default.headers, ...init.headers },
   };
   const { params, router, body, timeout, headers } = mergeInit;
+  const hasType =
+    Reflect.has(headers, 'Content-Type') ||
+    Reflect.has(headers, 'content-type');
   let url = path;
 
   if (router) {
@@ -29,10 +32,12 @@ async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
     ).trimEnd('&');
   }
 
-  if (typeof body === 'string') {
-    Reflect.set(headers, 'Content-Type', 'application/json');
-  } else if (body instanceof FormData) {
-    Reflect.set(headers, 'Content-Type', 'multipart/form-data');
+  if (!hasType) {
+    if (typeof body === 'string') {
+      Reflect.set(headers, 'Content-Type', 'application/json');
+    } else if (body instanceof FormData) {
+      Reflect.set(headers, 'Content-Type', 'multipart/form-data');
+    }
   }
 
   try {
