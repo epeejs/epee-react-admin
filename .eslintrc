@@ -32,8 +32,8 @@
       "error",
       {
         "order": [
-          "instance-variables",
           "static-methods",
+          "instance-variables",
           "lifecycle",
           "everything-else",
           "rendering"
