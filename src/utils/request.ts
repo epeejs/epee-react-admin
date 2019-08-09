@@ -31,13 +31,8 @@ async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
       _.reduce(params, (prev, val, key) => `${prev}${key}=${val}&`, '?'),
     ).trimEnd('&');
   }
-
-  if (!hasType) {
-    if (typeof body === 'string') {
-      Reflect.set(headers, 'Content-Type', 'application/json');
-    } else if (body instanceof FormData) {
-      Reflect.set(headers, 'Content-Type', 'multipart/form-data');
-    }
+  if (!hasType && typeof body === 'string') {
+    Reflect.set(headers, 'Content-Type', 'application/json');
   }
 
   try {
