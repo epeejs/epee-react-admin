@@ -1,6 +1,6 @@
-import { LocaleProvider } from 'antd';
+import { ConfigProvider } from 'antd';
 import 'antd/dist/antd.css';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
+import zhCN from 'antd/lib/locale/zh_CN';
 import { ConnectedRouter } from 'connected-react-router';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
@@ -15,7 +15,7 @@ import './style/index.css';
 moment.locale('zh-cn');
 
 ReactDOM.render(
-  <LocaleProvider locale={zhCN}>
+  <ConfigProvider locale={zhCN}>
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
@@ -23,6 +23,6 @@ ReactDOM.render(
         </Switch>
       </ConnectedRouter>
     </Provider>
-  </LocaleProvider>,
+  </ConfigProvider>,
   document.getElementById('root'),
 );
