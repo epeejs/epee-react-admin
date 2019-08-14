@@ -2,16 +2,18 @@ import { Dispatch } from 'react';
 import { Action } from 'redux';
 
 enum ActionTypes {
-  SIGN_IN = 'SIGN_IN',
+  FETCH_REPO_INFO_PENDING = 'FETCH_REPO_INFO_PENDING',
+  FETCH_REPO_INFO_OK = 'FETCH_REPO_INFO_OK',
+  FETCH_REPO_INFO_FAIL = 'FETCH_REPO_INFO_FAIL',
 }
 
-export interface IValueAction extends Action<ActionTypes> {
-  payload?: any;
+export interface IValueAction<P> extends Action<ActionTypes> {
+  payload?: P;
 }
 
-export type IValueDispatch = Dispatch<IValueAction>;
+export type ValueDispatch<T = any> = Dispatch<IValueAction<T>>;
 
-export interface IActionParam {
+export interface IActionParams {
   type: ActionTypes;
   payload?: any;
 }

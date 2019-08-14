@@ -19,7 +19,7 @@
     "scope": "typescript",
     "prefix": "tsreducer",
     "body": [
-      "import ActionTypes, { IActionParam } from 'constants/ActionTypes';",
+      "import ActionTypes, { IActionParams } from 'constants/ActionTypes';",
       "",
       "export interface ${1:IApp}State {",
       "  [key: string]: any;",
@@ -27,7 +27,7 @@
       "",
       "const initState: ${1:IApp}State = {};",
       "",
-      "function ${2:app}(state = initState, { type, payload }: IActionParam): ${1:IApp}State {",
+      "function ${2:app}(state = initState, { type, payload }: IActionParams): ${1:IApp}State {",
       "  switch (type) {",
       "    case ActionTypes:",
       "      return { ...state, key: payload };",
@@ -44,9 +44,9 @@
     "scope": "typescript",
     "prefix": "tsaction",
     "body": [
-      "import ActionTypes, { IValueDispatch } from 'constants/ActionTypes';",
+      "import ActionTypes, { ValueDispatch } from 'constants/ActionTypes';",
       "",
-      "export const ${1:functionName} = () => (dispatch: IValueDispatch) => {",
+      "export const ${1:functionName} = () => (dispatch: ValueDispatch) => {",
       "  dispatch({",
       "    type: ActionTypes,",
       "  });",
@@ -57,11 +57,11 @@
     "scope": "typescript",
     "prefix": "tsreq",
     "body": [
-      "import Api from 'constants/Api';",
+      "import { API } from 'constants/API';",
       "import request from 'utils/request';",
       "",
       "export const ${1:functionName} = () =>",
-      "  request<IResponseBody<[]>>(Api);"
+      "  request<IResponseBody<[]>>(API);"
     ]
   },
   "ts redux map": {

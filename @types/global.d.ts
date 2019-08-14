@@ -17,11 +17,11 @@ declare interface IResponseStatus {
 }
 
 declare interface IResponse<T> extends IResponseStatus {
-  res: IResponseBody<T>;
+  res?: IResponseBody<T>;
 }
 
 declare interface IResponseNotPage<T> extends IResponseStatus {
-  data: T;
+  data?: T;
 }
 
 declare interface IRequsetParams {

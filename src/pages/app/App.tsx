@@ -1,36 +1,39 @@
-import { signin } from 'actions/app';
+import { fetchRepoInfo } from 'actions/app.action';
 import { Button } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IReduxState } from 'reducer';
-import { IAppState, IUser } from 'reducer/app';
+import { IAppState, IRepo } from 'reducer/app.reducer';
 import styles from './style/App.module.scss';
 
-const mapStateToProps = ({ app: { user } }: IReduxState) => ({
-  user,
+const mapStateToProps = ({ app: { repo } }: IReduxState) => ({
+  repo,
 });
 const mapDispatchToProps = {
-  signin,
+  fetchRepoInfo,
 };
 
 interface AppProps extends IAppState {
-  signin: (user: IUser) => void;
+  repo: IResponseNotPage<IRepo>;
+  fetchRepoInfo: () => void;
 }
 
 class App extends React.Component<AppProps> {
   handleClick = () => {
-    this.props.signin({ name: '李大海' });
+    this.props.fetchRepoInfo();
   };
 
   render() {
-    const { user } = this.props;
+    const {
+      repo: { data, loading },
+    } = this.props;
 
     return (
       <div className={styles.wrapper}>
         <header className={styles.header}>
-          <p>当前登陆用户：{user ? user.name : '--'}</p>
-          <Button type="primary" onClick={this.handleClick}>
-            改变用户
+          <p>star：{data ? data.stargazers_count : '--'}</p>
+          <Button type="primary" loading={loading} onClick={this.handleClick}>
+            获取仓库信息
           </Button>
         </header>
       </div>
