@@ -2,8 +2,8 @@ import { fetchRepoInfo } from 'actions/app.action';
 import { Button } from 'antd';
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { IReduxState } from 'reducer';
-import { IAppState, IRepo } from 'reducer/app.reducer';
+import { IReduxState } from 'reducers';
+import { IAppState, IRepo } from 'reducers/app.reducer';
 import styles from './style/App.module.scss';
 
 const mapStateToProps = ({ app: { repo } }: IReduxState) => ({

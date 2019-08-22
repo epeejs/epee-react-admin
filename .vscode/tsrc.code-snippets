@@ -57,18 +57,18 @@
     "scope": "typescript",
     "prefix": "tsreq",
     "body": [
-      "import { API } from 'constants/API';",
+      "import { Api } from 'constants/Api';",
       "import request from 'utils/request';",
       "",
       "export const ${1:functionName} = () =>",
-      "  request<IResponseBody<[]>>(API);"
+      "  request<IResponseBody<[]>>(Api);"
     ]
   },
   "ts redux map": {
     "scope": "typescriptreact",
     "prefix": "tsrdxmap",
     "body": [
-      "import { IReduxState } from 'reducer';",
+      "import { IReduxState } from 'reducers';",
       "",
       "const mapStateToProps = ({ $1 }: IReduxState) => ({});",
       "const mapDispatchToProps = {};"

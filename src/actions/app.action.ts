@@ -1,5 +1,5 @@
 import ActionTypes, { ValueDispatch } from 'constants/ActionTypes';
-import { IRepo } from 'reducer/app.reducer';
+import { IRepo } from 'reducers/app.reducer';
 import { getReposInfo } from 'services/app.service';
 
 export const fetchRepoInfo = () => async (

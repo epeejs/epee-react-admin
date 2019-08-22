@@ -1,5 +1,5 @@
-import { API } from 'constants/API';
+import { Api } from 'constants/Api';
 import request from 'utils/request';
 
 export const getReposInfo = () =>
-  request<IResponseBody<{}>>(API.GET_REPOS_INFO);
+  request<IResponseBody<{}>>(Api.GET_REPOS_INFO);
