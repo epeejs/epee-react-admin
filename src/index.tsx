@@ -8,8 +8,8 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
+import { history, store } from './constants/store';
 import App from './pages/app';
-import store, { history } from './store';
 import './style/index.css';
 
 moment.locale('zh-cn');

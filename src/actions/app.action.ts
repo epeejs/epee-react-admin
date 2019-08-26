@@ -1,4 +1,4 @@
-import ActionTypes, { ValueDispatch } from 'constants/ActionTypes';
+import { ActionTypes, ValueDispatch } from 'constants/ActionTypes';
 import { IRepo } from 'reducers/app.reducer';
 import { getReposInfo } from 'services/app.service';
 

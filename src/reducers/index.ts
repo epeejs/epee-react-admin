@@ -1,7 +1,7 @@
 import { connectRouter, RouterState } from 'connected-react-router';
 import { History } from 'history';
 import { combineReducers } from 'redux';
-import app, { IAppState } from './app.reducer';
+import { app, IAppState } from './app.reducer';
 
 export interface IReduxState {
   router: RouterState;
@@ -10,7 +10,7 @@ export interface IReduxState {
 
 export type GetState = () => IReduxState;
 
-export default (history: History) =>
+export const createRootReducer = (history: History) =>
   combineReducers({
     router: connectRouter(history),
     app,

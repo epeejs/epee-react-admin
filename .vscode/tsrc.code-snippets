@@ -19,7 +19,7 @@
     "scope": "typescript",
     "prefix": "tsreducer",
     "body": [
-      "import ActionTypes, { IActionParams } from 'constants/ActionTypes';",
+      "import { ActionTypes, IActionParams } from 'constants/ActionTypes';",
       "",
       "export interface ${1:IApp}State {",
       "  [key: string]: any;",
@@ -27,7 +27,7 @@
       "",
       "const initState: ${1:IApp}State = {};",
       "",
-      "function ${2:app}(state = initState, { type, payload }: IActionParams): ${1:IApp}State {",
+      "export function ${2:app}(state = initState, { type, payload }: IActionParams): ${1:IApp}State {",
       "  switch (type) {",
       "    case ActionTypes:",
       "      return { ...state, key: payload };",
@@ -35,16 +35,14 @@
       "    default:",
       "      return state;",
       "  }",
-      "}",
-      "",
-      "export default ${2:app};"
+      "}"
     ]
   },
   "action": {
     "scope": "typescript",
     "prefix": "tsaction",
     "body": [
-      "import ActionTypes, { ValueDispatch } from 'constants/ActionTypes';",
+      "import { ActionTypes, ValueDispatch } from 'constants/ActionTypes';",
       "",
       "export const ${1:functionName} = () => (dispatch: ValueDispatch) => {",
       "  dispatch({",

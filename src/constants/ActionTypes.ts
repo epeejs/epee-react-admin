@@ -1,7 +1,7 @@
 import { Dispatch } from 'react';
 import { Action } from 'redux';
 
-enum ActionTypes {
+export enum ActionTypes {
   FETCH_REPO_INFO_PENDING = 'FETCH_REPO_INFO_PENDING',
   FETCH_REPO_INFO_OK = 'FETCH_REPO_INFO_OK',
   FETCH_REPO_INFO_FAIL = 'FETCH_REPO_INFO_FAIL',
@@ -17,5 +17,3 @@ export interface IActionParams {
   type: ActionTypes;
   payload?: any;
 }
-
-export default ActionTypes;

@@ -36,10 +36,10 @@ yarn start
 │ │ ├── _const.scss              # scss常量
 │ │ ├── ActionTypes.ts           # ActionType常量
 │ │ └── Api.ts                   # API常量
+│ │ └── store.ts                 # store
 │ ├── /pages/                    # UI组件目录
 │ ├── /reducer/                  # reducer目录
 │ ├── /services/                 # 请求服务目录
-│ ├── /store/                    # 存放store文件目录
 │ ├── /style/                    # 全局样式
 │ ├── /utils/                    # utils目录
 │ │ ├── request.ts               # 基于fetch封装的API请求工具

@@ -1,4 +1,4 @@
-import ActionTypes, { IActionParams } from 'constants/ActionTypes';
+import { ActionTypes, IActionParams } from 'constants/ActionTypes';
 
 export interface IRepo {
   stargazers_count: number;
@@ -15,7 +15,10 @@ const initState: IAppState = {
   },
 };
 
-function app(state = initState, { type, payload }: IActionParams): IAppState {
+export function app(
+  state = initState,
+  { type, payload }: IActionParams,
+): IAppState {
   switch (type) {
     case ActionTypes.FETCH_REPO_INFO_PENDING:
       return {
@@ -46,5 +49,3 @@ function app(state = initState, { type, payload }: IActionParams): IAppState {
       return state;
   }
 }
-
-export default app;
