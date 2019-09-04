@@ -60,10 +60,14 @@
     "no-redeclare": "off",
     "no-unused-vars": "off",
     "no-var": "error",
+    "no-console": "error",
     "prefer-rest-params": "error",
     "prefer-spread": "error",
-    "no-console": "error",
     "prefer-const": "error",
-    "no-empty-function": "error"
+    "no-empty-function": "error",
+    "eqeqeq": "error",
+    "array-callback-return": "error",
+    "default-case": "error",
+    "no-shadow": "error"
   }
 }
