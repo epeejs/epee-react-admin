@@ -19,15 +19,15 @@
     "scope": "typescript",
     "prefix": "tsreducer",
     "body": [
-      "import { ActionTypes, IActionParams } from 'constants/ActionTypes';",
+      "import { ActionTypes, ActionParams } from 'constants/ActionTypes';",
       "",
-      "export interface ${1:IApp}State {",
+      "export interface ${1:App}ReducerState {",
       "  [key: string]: any;",
       "}",
       "",
-      "const initState: ${1:IApp}State = {};",
+      "const initState: ${1:App}ReducerState = {};",
       "",
-      "export function ${2:app}(state = initState, { type, payload }: IActionParams): ${1:IApp}State {",
+      "export function ${2:app}Reducer(state = initState, { type, payload }: ActionParams): ${1:App}ReducerState {",
       "  switch (type) {",
       "    case ActionTypes:",
       "      return { ...state, key: payload };",
@@ -66,9 +66,9 @@
     "scope": "typescriptreact",
     "prefix": "tsrdxmap",
     "body": [
-      "import { IReduxState } from 'reducers';",
+      "import { ReduxState } from 'reducers';",
       "",
-      "const mapStateToProps = ({ $1 }: IReduxState) => ({});",
+      "const mapStateToProps = ({ $1 }: ReduxState) => ({});",
       "const mapDispatchToProps = {};"
     ]
   },
@@ -76,7 +76,7 @@
     "scope": "typescriptreact",
     "prefix": "tsrcc",
     "body": [
-      "import * as React from 'react';",
+      "import React from 'react';",
       "import styles from '../style/${1:App}.module.scss';",
       "",
       "interface ${1:App}Props {",
@@ -109,6 +109,6 @@
   "export inteface": {
     "scope": "typescriptreact,typescript",
     "prefix": "ei",
-    "body": ["export interface ${1:IApp} {", "  $2", "}"]
+    "body": ["export interface ${1:App} {", "  $2", "}"]
   }
 }

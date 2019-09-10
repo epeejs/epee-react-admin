@@ -4,12 +4,12 @@ import zhCN from 'antd/lib/locale/zh_CN';
 import { ConnectedRouter } from 'connected-react-router';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
+import App from 'pages/app';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { history, store } from './constants/store';
-import App from './pages/app';
 import './style/index.css';
 
 moment.locale('zh-cn');

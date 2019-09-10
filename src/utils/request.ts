@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import 'whatwg-fetch';
 
-interface ReqInit extends RequestInit {
+export interface ReqInit extends RequestInit {
   headers?: Record<string, string>;
   /** eg. ?a=1 */
   params?: { [key: string]: any };

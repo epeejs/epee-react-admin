@@ -26,7 +26,7 @@ declare interface IResponseNotPage<T> extends IResponseStatus {
 
 declare interface IRequsetParams {
   page: number;
-  pagesize: number;
+  pageSize: number;
   search: string;
 }
 

@@ -7,13 +7,13 @@ export enum ActionTypes {
   FETCH_REPO_INFO_FAIL = 'FETCH_REPO_INFO_FAIL',
 }
 
-export interface IValueAction<P> extends Action<ActionTypes> {
+export interface ValueAction<P = any> extends Action<ActionTypes> {
   payload?: P;
 }
 
-export type ValueDispatch<T = any> = Dispatch<IValueAction<T>>;
+export type ValueDispatch<T = any> = Dispatch<ValueAction<T>>;
 
-export interface IActionParams {
+export interface ActionParams {
   type: ActionTypes;
   payload?: any;
 }

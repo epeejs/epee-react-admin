@@ -1,24 +1,24 @@
-import { ActionTypes, IActionParams } from 'constants/ActionTypes';
+import { ActionParams, ActionTypes } from 'constants/ActionTypes';
 
-export interface IRepo {
+export interface Repo {
   stargazers_count: number;
   [other: string]: any;
 }
-export interface IAppState {
-  repo: IResponseNotPage<IRepo>;
+export interface AppReducerState {
+  repo: IResponseNotPage<Repo>;
 }
 
-const initState: IAppState = {
+const initState: AppReducerState = {
   repo: {
     loading: false,
     error: false,
   },
 };
 
-export function app(
+export function appReducer(
   state = initState,
-  { type, payload }: IActionParams,
-): IAppState {
+  { type, payload }: ActionParams,
+): AppReducerState {
   switch (type) {
     case ActionTypes.FETCH_REPO_INFO_PENDING:
       return {

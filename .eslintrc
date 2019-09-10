@@ -1,5 +1,5 @@
 {
-  "plugins": ["@typescript-eslint", "react", "import"],
+  "plugins": ["@typescript-eslint", "react", "import", "react-hooks"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 2018,
@@ -17,16 +17,9 @@
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
-    "import/order": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "react/no-unsafe": ["error", { "checkAliases": true }],
-    "react/jsx-no-bind": [
-      "error",
-      {
-        "ignoreDOMComponents": true,
-        "ignoreRefs": true,
-        "allowBind": true
-      }
-    ],
     "react/self-closing-comp": "error",
     "react/sort-comp": [
       "error",
@@ -47,6 +40,7 @@
     "@typescript-eslint/no-array-constructor": "error",
     "@typescript-eslint/camelcase": "error",
     "@typescript-eslint/class-name-casing": "error",
+    "@typescript-eslint/interface-name-prefix": "error",
     "getter-return": "off",
     "no-dupe-args": "off",
     "no-dupe-keys": "off",
