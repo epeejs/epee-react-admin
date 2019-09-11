@@ -21,15 +21,15 @@
     "body": [
       "import { ActionTypes, ActionParams } from 'constants/ActionTypes';",
       "",
-      "export interface ${1:App}ReducerState {",
+      "export interface ${1:${TM_FILENAME_BASE/(.*)\\.reducer/${1:/capitalize}/}}ReducerState {",
       "  [key: string]: any;",
       "}",
       "",
-      "const initState: ${1:App}ReducerState = {};",
+      "const initState: ${1:${TM_FILENAME_BASE/(.*)\\.reducer/${1:/capitalize}/}}ReducerState = {};",
       "",
-      "export function ${2:app}Reducer(state = initState, { type, payload }: ActionParams): ${1:App}ReducerState {",
+      "export function ${2:${TM_FILENAME_BASE/(.*)\\.reducer/${1}/}}Reducer(state = initState, { type, payload }: ActionParams): ${1:${TM_FILENAME_BASE/(.*)\\.reducer/${1:/capitalize}/}}ReducerState {",
       "  switch (type) {",
-      "    case ActionTypes:",
+      "    case ActionTypes.$0:",
       "      return { ...state, key: payload };",
       "",
       "    default:",
@@ -68,7 +68,7 @@
     "body": [
       "import { ReduxState } from 'reducers';",
       "",
-      "const mapStateToProps = ({ $1 }: ReduxState) => ({});",
+      "const mapStateToProps = ({ $0 }: ReduxState) => ({});",
       "const mapDispatchToProps = {};"
     ]
   },
@@ -77,40 +77,40 @@
     "prefix": "tsrcc",
     "body": [
       "import React from 'react';",
-      "import styles from '../style/${1:App}.module.scss';",
+      "import styles from '../style/${1:${TM_FILENAME_BASE}}.module.scss';",
       "",
-      "interface ${1:App}Props {",
+      "interface ${1:${TM_FILENAME_BASE}}Props {",
       "  [key: string]: any;",
       "}",
       "",
-      "class ${1:App} extends React.Component<${1:App}Props, any> {",
+      "class ${1:${TM_FILENAME_BASE}} extends React.Component<${1:${TM_FILENAME_BASE}}Props, any> {",
       "  render() {",
       "    return (",
       "      <div>",
-      "         $2",
+      "         $0",
       "      </div>",
       "    );",
       "  }",
       "}",
       "",
-      "export default ${1:App};"
+      "export default ${1:${TM_FILENAME_BASE}};"
     ]
   },
-  "ts function component": {
+  "ts react function component": {
     "scope": "typescriptreact",
-    "prefix": "tsfc",
+    "prefix": "tsrfc",
     "body": [
       "import React from 'react';",
-      "import styles from '../style/${1:App}.module.scss';",
+      "import styles from '../style/${1:${TM_FILENAME_BASE}}.module.scss';",
       "",
-      "interface ${1:App}Props {",
+      "interface ${1:${TM_FILENAME_BASE}}Props {",
       "  [key: string]: any;",
       "}",
       "",
-      "export default function ${1:App}(props: ${1:App}Props) {",
+      "export default function ${1:${TM_FILENAME_BASE}}(props: ${1:${TM_FILENAME_BASE}}Props) {",
       "  return (",
       "    <div className={styles.wrap}>",
-      "      ${2}",
+      "      ${0}",
       "    </div>",
       "  );",
       "}"
@@ -119,16 +119,16 @@
   "const {} = object": {
     "scope": "typescriptreact,typescript,javascript",
     "prefix": "co",
-    "body": ["const { $2 } = ${1:object};"]
+    "body": ["const { $0 } = ${1:object};"]
   },
   "const [] = array": {
     "scope": "typescriptreact,typescript,javascript",
     "prefix": "ca",
-    "body": ["const [ $2 ] = ${1:array};"]
+    "body": ["const [ $0 ] = ${1:array};"]
   },
   "export inteface": {
     "scope": "typescriptreact,typescript",
     "prefix": "ei",
-    "body": ["export interface ${1:App} {", "  $2", "}"]
+    "body": ["export interface ${1:App} {", "  $0", "}"]
   }
 }
