@@ -1,4 +1,5 @@
 {
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "plugins": ["@typescript-eslint", "react", "import", "react-hooks"],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -15,11 +16,15 @@
     "jest": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/no-unsafe": ["error", { "checkAliases": true }],
+    "react/no-unsafe": [
+      "error",
+      {
+        "checkAliases": true
+      }
+    ],
     "react/self-closing-comp": "error",
     "react/sort-comp": [
       "error",
@@ -62,6 +67,8 @@
     "eqeqeq": "error",
     "array-callback-return": "error",
     "default-case": "error",
-    "no-shadow": "error"
+    "no-shadow": "error",
+    "generator-star-spacing": ["warn", "after"],
+    "yield-star-spacing": ["warn", "after"]
   }
 }
