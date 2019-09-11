@@ -72,7 +72,7 @@
       "const mapDispatchToProps = {};"
     ]
   },
-  "ts react component": {
+  "ts react class component": {
     "scope": "typescriptreact",
     "prefix": "tsrcc",
     "body": [
@@ -94,6 +94,26 @@
       "}",
       "",
       "export default ${1:App};"
+    ]
+  },
+  "ts function component": {
+    "scope": "typescriptreact",
+    "prefix": "tsfc",
+    "body": [
+      "import React from 'react';",
+      "import styles from '../style/${1:App}.module.scss';",
+      "",
+      "interface ${1:App}Props {",
+      "  [key: string]: any;",
+      "}",
+      "",
+      "export default function ${1:App}(props: ${1:App}Props) {",
+      "  return (",
+      "    <div className={styles.wrap}>",
+      "      ${2}",
+      "    </div>",
+      "  );",
+      "}"
     ]
   },
   "const {} = object": {
