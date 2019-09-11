@@ -25,7 +25,7 @@
         "checkAliases": true
       }
     ],
-    "react/self-closing-comp": "error",
+    "react/self-closing-comp": "warn",
     "react/sort-comp": [
       "error",
       {
