@@ -15,40 +15,18 @@
   // 	],
   // 	"description": "Log output to console"
   // }
-  "reducer": {
+  "react ts model": {
     "scope": "typescript",
-    "prefix": "tsreducer",
+    "prefix": "tsmodel",
     "body": [
-      "import { ActionTypes, ActionParams } from 'constants/ActionTypes';",
       "",
-      "export interface ${1:${TM_FILENAME_BASE/(.*)\\.reducer/${1:/capitalize}/}}ReducerState {",
+      "export interface ${1:${TM_FILENAME_BASE/(.*)\\.model/${1:/capitalize}/}}Model {",
       "  [key: string]: any;",
       "}",
       "",
-      "const initState: ${1:${TM_FILENAME_BASE/(.*)\\.reducer/${1:/capitalize}/}}ReducerState = {};",
-      "",
-      "export function ${2:${TM_FILENAME_BASE/(.*)\\.reducer/${1}/}}Reducer(state = initState, { type, payload }: ActionParams): ${1:${TM_FILENAME_BASE/(.*)\\.reducer/${1:/capitalize}/}}ReducerState {",
-      "  switch (type) {",
-      "    case ActionTypes.$0:",
-      "      return { ...state, key: payload };",
-      "",
-      "    default:",
-      "      return state;",
-      "  }",
+      "export const ${2:${TM_FILENAME_BASE/(.*)\\.model/${1}/}}Model: ${1:${TM_FILENAME_BASE/(.*)\\.model/${1:/capitalize}/}}Model = {",
+      "  $0",
       "}"
-    ]
-  },
-  "action": {
-    "scope": "typescript",
-    "prefix": "tsaction",
-    "body": [
-      "import { ActionTypes, ValueDispatch } from 'constants/ActionTypes';",
-      "",
-      "export const ${1:functionName} = () => (dispatch: ValueDispatch) => {",
-      "  dispatch({",
-      "    type: ActionTypes,",
-      "  });",
-      "};"
     ]
   },
   "request": {
@@ -59,41 +37,7 @@
       "import request from 'utils/request';",
       "",
       "export const ${1:functionName} = () =>",
-      "  request<IResponseBody<[]>>(Api);"
-    ]
-  },
-  "ts redux map": {
-    "scope": "typescriptreact",
-    "prefix": "tsrdxmap",
-    "body": [
-      "import { ReduxState } from 'reducers';",
-      "",
-      "const mapStateToProps = ({ $0 }: ReduxState) => ({});",
-      "const mapDispatchToProps = {};"
-    ]
-  },
-  "ts react class component": {
-    "scope": "typescriptreact",
-    "prefix": "tsrcc",
-    "body": [
-      "import React from 'react';",
-      "import styles from '../style/${1:${TM_FILENAME_BASE}}.module.scss';",
-      "",
-      "interface ${1:${TM_FILENAME_BASE}}Props {",
-      "  [key: string]: any;",
-      "}",
-      "",
-      "class ${1:${TM_FILENAME_BASE}} extends React.Component<${1:${TM_FILENAME_BASE}}Props, any> {",
-      "  render() {",
-      "    return (",
-      "      <div>",
-      "         $0",
-      "      </div>",
-      "    );",
-      "  }",
-      "}",
-      "",
-      "export default ${1:${TM_FILENAME_BASE}};"
+      "  request<IResponseBody<any>>(Api);"
     ]
   },
   "ts react function component": {
@@ -101,7 +45,7 @@
     "prefix": "tsrfc",
     "body": [
       "import React from 'react';",
-      "import styles from '../style/${1:${TM_FILENAME_BASE}}.module.scss';",
+      "import styles from './style/${1:${TM_FILENAME_BASE}}.module.scss';",
       "",
       "interface ${1:${TM_FILENAME_BASE}}Props {",
       "  [key: string]: any;",
