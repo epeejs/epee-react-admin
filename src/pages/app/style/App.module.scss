@@ -10,5 +10,9 @@
     color: white;
     font-size: calc(10px + 2vmin);
     background-color: #282c34;
+
+    > :last-child {
+      margin: 20px 0;
+    }
   }
 }

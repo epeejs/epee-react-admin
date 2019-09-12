@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useStoreActions, useStoreState } from 'hooks';
 import React from 'react';
-import { RouteComponentProps } from 'react-router';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { useAsyncFn } from 'react-use';
 import styles from './style/App.module.scss';
 
@@ -14,7 +14,6 @@ export default function App(props: AppProps) {
   const fetchReposInfo = useStoreActions(
     actions => actions.appModel.fetchReposInfo,
   );
-
   const [state, fetch] = useAsyncFn(async () => {
     await fetchReposInfo();
   }, []);
@@ -26,6 +25,7 @@ export default function App(props: AppProps) {
         <Button type="primary" loading={state.loading} onClick={() => fetch()}>
           获取仓库信息
         </Button>
+        <Link to="/login">跳转登录页</Link>
       </header>
     </div>
   );

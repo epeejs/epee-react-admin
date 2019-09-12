@@ -5,6 +5,7 @@ import { StoreProvider } from 'easy-peasy';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 import App from 'pages/app';
+import Login from 'pages/login';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -18,6 +19,7 @@ ReactDOM.render(
     <StoreProvider store={store}>
       <Router>
         <Switch>
+          <Route path="/login" component={Login} />
           <Route path="/" component={App} />
         </Switch>
       </Router>
