@@ -1,9 +1,8 @@
 import { Button } from 'antd';
-import { ActionTypes, ValueDispatch } from 'constants/ActionTypes';
+import { useStoreActions, useStoreState } from 'hooks';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
-import { ReduxState } from 'reducers';
+import { useAsyncFn } from 'react-use';
 import styles from './style/App.module.scss';
 
 interface AppProps extends RouteComponentProps {
@@ -11,24 +10,20 @@ interface AppProps extends RouteComponentProps {
 }
 
 export default function App(props: AppProps) {
-  const { data, loading } = useSelector(
-    (state: ReduxState) => state.appReducer.repo,
+  const repos = useStoreState(state => state.appModel.repos);
+  const fetchReposInfo = useStoreActions(
+    actions => actions.appModel.fetchReposInfo,
   );
-  const dispatch: ValueDispatch = useDispatch();
+
+  const [state, fetch] = useAsyncFn(async () => {
+    await fetchReposInfo();
+  }, []);
 
   return (
     <div className={styles.wrap}>
       <header className={styles.header}>
-        <p>star：{data ? data.stargazers_count : '--'}</p>
-        <Button
-          type="primary"
-          loading={loading}
-          onClick={() => {
-            dispatch({
-              type: ActionTypes.FETCH_REPO_INFO_PENDING,
-            });
-          }}
-        >
+        <p>star：{repos ? repos.stargazers_count : '--'}</p>
+        <Button type="primary" loading={state.loading} onClick={() => fetch()}>
           获取仓库信息
         </Button>
       </header>
