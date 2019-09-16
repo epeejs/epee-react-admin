@@ -1,19 +1,23 @@
 import { Action, action, Thunk, thunk } from 'easy-peasy';
-import { getReposInfo } from 'services/app.service';
+import { getReposInfo } from 'services/repos.service';
 
 export interface Repos {
   stargazers_count: number;
   [other: string]: any;
 }
 
-export interface AppModel {
+export interface ReposModel {
   repos: Repos | null;
-  fetchReposInfo: Thunk<AppModel>;
-  setRepos: Action<AppModel, Repos>;
+  reset: Action<ReposModel>;
+  setRepos: Action<ReposModel, Repos>;
+  fetchReposInfo: Thunk<ReposModel>;
 }
 
-export const appModel: AppModel = {
+export const reposModel: ReposModel = {
   repos: null,
+  reset: action(state => {
+    state.repos = null;
+  }),
   setRepos: action((state, payload) => {
     state.repos = payload;
   }),

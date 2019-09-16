@@ -1,9 +1,9 @@
-import { AppModel, appModel } from './app.model';
+import { ReposModel, reposModel } from './repos.model';
 
 export interface StoreModel {
-  appModel: AppModel;
+  reposModel: ReposModel;
 }
 
 export const storeModel: StoreModel = {
-  appModel,
+  reposModel,
 };
