@@ -23,13 +23,11 @@ export interface MenuDataItem {
   routes?: RouteType[];
 }
 
-interface BasicLayoutProps extends RouteComponentProps {
-  menuData: MenuDataItem[];
-  children?: React.ReactNode;
-}
-
 function renderMenu(menu: MenuDataItem[]) {
   return menu.map(m => {
+    if (m.hideInMenu) {
+      return null;
+    }
     if (!_.isEmpty(m.children) || !_.isEmpty(m.routes)) {
       return (
         <SubMenu
@@ -59,6 +57,9 @@ function renderMenu(menu: MenuDataItem[]) {
 
 function renderRoute(menu: MenuDataItem[]): any[] {
   return menu.map(m => {
+    if (m.hideInMenu) {
+      return null;
+    }
     if (!_.isEmpty(m.children) || !_.isEmpty(m.routes)) {
       return !_.isEmpty(m.children)
         ? renderRoute(m.children!)
@@ -71,18 +72,25 @@ function renderRoute(menu: MenuDataItem[]): any[] {
   });
 }
 
+interface BasicLayoutProps extends RouteComponentProps {
+  menuData: MenuDataItem[];
+  collapsed?: boolean;
+  children?: React.ReactNode;
+}
+
 export default function BasicLayout({
   menuData,
   history,
   location: { pathname },
   children,
+  collapsed = false,
 }: BasicLayoutProps) {
   const paths = _.dropRight(pathname.split('/'), 1);
   const openKeys = paths.map((m, i) => _.take(paths, i + 1).join('/'));
 
   return (
     <Layout>
-      <Sider width={256}>
+      <Sider width={256} collapsed={collapsed}>
         <div className={styles.logo}>Epee Admin</div>
         <Menu
           mode="inline"
