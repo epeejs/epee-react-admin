@@ -2,21 +2,23 @@ import { Button } from 'antd';
 import { useStoreActions, useStoreState } from 'hooks';
 import React from 'react';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { useAsyncFn } from 'react-use';
-import styles from './style/App.module.scss';
+import { useAsyncFn, useUnmount } from 'react-use';
+import styles from './style/Home.module.scss';
 
-interface AppProps extends RouteComponentProps {
+interface HomeProps extends RouteComponentProps {
   [key: string]: any;
 }
 
-export default function App(props: AppProps) {
-  const repos = useStoreState(state => state.appModel.repos);
+export default function Home(props: HomeProps) {
+  const repos = useStoreState(state => state.reposModel.repos);
   const fetchReposInfo = useStoreActions(
-    actions => actions.appModel.fetchReposInfo,
+    actions => actions.reposModel.fetchReposInfo,
   );
+  const reset = useStoreActions(actions => actions.reposModel.reset);
   const [state, fetch] = useAsyncFn(async () => {
     await fetchReposInfo();
   }, []);
+  useUnmount(() => reset());
 
   return (
     <div className={styles.wrap}>
