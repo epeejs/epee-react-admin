@@ -77,6 +77,9 @@ export default function BasicLayout({
   location: { pathname },
   children,
 }: BasicLayoutProps) {
+  const paths = _.dropRight(pathname.split('/'), 1);
+  const openKeys = paths.map((m, i) => _.take(paths, i + 1).join('/'));
+
   return (
     <Layout>
       <Sider width={256}>
@@ -84,6 +87,7 @@ export default function BasicLayout({
         <Menu
           mode="inline"
           theme="dark"
+          defaultOpenKeys={openKeys}
           selectedKeys={[pathname]}
           onSelect={param => history.push(param.key)}
         >
