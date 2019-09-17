@@ -33,21 +33,31 @@ export default function EChart({
       chart.dispose();
     };
   });
+
   useEffect(() => {
     if (chartRef.current) {
       chartRef.current.setOption(option);
     }
   }, [option]);
+
   useEffect(() => {
     function resize() {
       if (chartRef.current) {
         chartRef.current.resize();
       }
     }
-    window.addEventListener('resize', resize);
+    const sidebarElm = document.getElementsByClassName('ant-layout-sider')[0];
+
+    setTimeout(() => {
+      window.addEventListener('resize', resize);
+
+      // 修复侧边栏收缩不能resize问题
+      sidebarElm.addEventListener('transitionend', resize);
+    }, 100);
 
     return () => {
       window.removeEventListener('resize', resize);
+      sidebarElm.removeEventListener('transitionend', resize);
     };
   }, []);
 
