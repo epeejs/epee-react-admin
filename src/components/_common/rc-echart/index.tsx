@@ -7,11 +7,12 @@ import 'echarts/lib/component/title';
 import 'echarts/lib/component/tooltip';
 import * as echarts from 'echarts/lib/echarts';
 import React, { useEffect, useRef } from 'react';
-import { useEffectOnce } from 'react-use';
+import { useMount, useUnmount } from 'react-use';
 
 export type EChartOption = echarts.EChartOption;
 interface EChartProps {
   option: EChartOption;
+  timestamp?: number;
   style?: React.CSSProperties;
   onClick?: (param: any) => void;
 }
@@ -19,47 +20,46 @@ interface EChartProps {
 export default function EChart({
   option,
   onClick,
+  timestamp,
   style = { width: '100%', height: '100%' },
 }: EChartProps) {
   const cntrRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<echarts.ECharts | null>(null);
 
-  useEffectOnce(() => {
-    const chart = echarts.init(cntrRef.current!);
-    chart.on('click', (params: any) => onClick && onClick(params));
-    chartRef.current = chart;
+  function resize() {
+    if (chartRef.current) {
+      chartRef.current.resize();
+    }
+  }
 
-    return () => {
-      chart.dispose();
-    };
+  useMount(() => {
+    setTimeout(() => {
+      const chart = echarts.init(cntrRef.current!);
+      chart.on('click', (params: any) => onClick && onClick(params));
+      chart.setOption(option);
+      chartRef.current = chart;
+    }, 100);
   });
-
+  useUnmount(() => {
+    if (chartRef.current) {
+      chartRef.current.dispose();
+    }
+  });
   useEffect(() => {
     if (chartRef.current) {
       chartRef.current.setOption(option);
     }
   }, [option]);
-
   useEffect(() => {
-    function resize() {
-      if (chartRef.current) {
-        chartRef.current.resize();
-      }
-    }
-    const sidebarElm = document.getElementsByClassName('ant-layout-sider')[0];
-
-    setTimeout(() => {
-      window.addEventListener('resize', resize);
-
-      // 修复侧边栏收缩不能resize问题
-      sidebarElm.addEventListener('transitionend', resize);
-    }, 100);
+    window.addEventListener('resize', resize);
 
     return () => {
       window.removeEventListener('resize', resize);
-      sidebarElm.removeEventListener('transitionend', resize);
     };
   }, []);
+  useEffect(() => {
+    resize();
+  }, [timestamp]);
 
   return <div style={style} ref={cntrRef} />;
 }

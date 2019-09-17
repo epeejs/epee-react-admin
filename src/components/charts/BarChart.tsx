@@ -1,5 +1,5 @@
 import * as echarts from 'echarts/lib/echarts';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import React from 'react';
 import EChart, { EChartOption } from '../_common/rc-echart';
 
@@ -10,6 +10,7 @@ interface Value {
 
 interface BarChartProps {
   practiceData?: Value[];
+  timestamp?: number;
 }
 
 export default function BarChart(props: BarChartProps) {
@@ -22,8 +23,8 @@ export default function BarChart(props: BarChartProps) {
     { name: '其他', value: 38 },
   ];
 
-  const names = _.map(practiceData, 'name') as string[];
-  const values = _.map(practiceData, 'value') as number[];
+  const names = _.map(practiceData, 'name');
+  const values = _.map(practiceData, 'value');
   const total = _.sum(values);
 
   const option: EChartOption = {
@@ -124,7 +125,7 @@ export default function BarChart(props: BarChartProps) {
 
   return (
     <div style={{ width: '100%', height: '300px' }}>
-      <EChart option={option} />
+      <EChart option={option} timestamp={props.timestamp} />
     </div>
   );
 }
