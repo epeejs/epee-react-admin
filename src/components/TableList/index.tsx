@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import styles from './style/TableList.module.scss';
+import styles from './index.module.scss';
 
 interface TableListProps extends RouteComponentProps {
   [key: string]: any;

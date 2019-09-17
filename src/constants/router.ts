@@ -1,4 +1,4 @@
-import TableList from 'components/table-list';
+import TableList from 'components/TableList';
 import { MenuDataItem } from 'layouts/BasicLayout';
 
 export const router: MenuDataItem[] = [
