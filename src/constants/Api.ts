@@ -4,4 +4,5 @@ const baseUrl =
 export const Api = {
   POST_LOGIN: `${baseUrl}/login`,
   GET_REPOS_INFO: 'https://api.github.com/repos/dobble11/react-ts-starter',
+  GET_CHART_DATA: `${baseUrl}/chart/data`,
 };
