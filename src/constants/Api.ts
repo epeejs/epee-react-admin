@@ -4,4 +4,5 @@ const baseUrl =
 export const Api = {
   POST_LOGIN: `${baseUrl}/login`,
   POST_SERVICE_LIST: `${baseUrl}/service-list`,
+  GET_CHART_DATA: `${baseUrl}/chart/data`,
 };
