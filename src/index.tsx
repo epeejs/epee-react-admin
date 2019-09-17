@@ -4,12 +4,12 @@ import zhCN from 'antd/lib/locale/zh_CN';
 import { StoreProvider } from 'easy-peasy';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import Home from 'pages/home';
-import Login from 'pages/login';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { store } from './constants/store';
+import Home from './pages/Home';
+import Login from './pages/Login';
 import './style/global.css';
 
 moment.locale('zh-cn');

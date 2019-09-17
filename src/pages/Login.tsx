@@ -2,7 +2,7 @@ import { Button, Checkbox, Form, Icon, Input } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import styles from './style/Login.module.scss';
+import styles from './Login.module.scss';
 
 interface LoginProps extends RouteComponentProps, FormComponentProps {
   [key: string]: any;
