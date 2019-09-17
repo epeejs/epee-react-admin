@@ -11,6 +11,11 @@ declare interface ResponseBody<T> {
   data: T;
 }
 
+declare interface PageData<T> {
+  list: T[];
+  total: number;
+}
+
 declare interface ResponseStatus {
   loading: boolean;
   error: boolean;
