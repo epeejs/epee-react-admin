@@ -30,6 +30,6 @@ export const dashboardModel: DashboardModel = {
 
   fetchChartData: thunk(async actions => {
     const res = await getChartData();
-    actions.setChartData(res);
+    actions.setChartData(res.data);
   }),
 };
