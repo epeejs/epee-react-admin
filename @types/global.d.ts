@@ -16,6 +16,11 @@ declare interface PageData<T> {
   total: number;
 }
 
+declare interface PageParams {
+  page: number;
+  pageSize: number;
+}
+
 declare interface ResponseStatus {
   loading: boolean;
   error: boolean;

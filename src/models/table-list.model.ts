@@ -54,8 +54,8 @@ export const tableListModel: TableListModel = {
     state.data = payload;
   }),
   fetchServiceList: thunk(async (actions, payload, { getState }) => {
-    const prevFilter = getState().filter;
-    const res = await getServiceList(prevFilter);
+    const { page, pageSize, ...otherFilter } = getState().filter;
+    const res = await getServiceList(otherFilter, { page, pageSize });
 
     actions.setData(res.data);
   }),

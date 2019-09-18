@@ -3,6 +3,6 @@ const baseUrl =
 
 export const Api = {
   POST_LOGIN: `${baseUrl}/login`,
-  POST_SERVICE_LIST: `${baseUrl}/service-list`,
+  POST_SERVICE_LIST: `${baseUrl}/service-list/pageSize/:pageSize/page/:page`,
   GET_CHART_DATA: `${baseUrl}/chart/data`,
 };

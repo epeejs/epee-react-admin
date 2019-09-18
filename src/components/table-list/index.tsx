@@ -1,10 +1,11 @@
-import { Badge, Divider, Table } from 'antd';
+import { Badge, Button, Divider, Table } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
 import { useStoreActions, useStoreState } from 'hooks';
 import moment from 'moment';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import styles from './index.module.scss';
+import { useAsyncFn } from 'react-use';
+import styles from './style/TableList.module.scss';
 
 const status = ['关闭', '运行中', '已上线', '异常'];
 const statusMap = ['default', 'processing', 'success', 'error'];
@@ -68,31 +69,45 @@ export default function TableList(props: TableListProps) {
       render(_: any, row: any) {
         return (
           <div>
-            <button>配置</button>
+            <Button type="link">配置</Button>
             <Divider type="vertical" />
-            <button>订阅警报</button>
+            <Button type="link">订阅警报</Button>
           </div>
         );
       },
     },
   ];
   const { total, list } = useStoreState(state => state.tableListModel.data);
-  const { page, pageSize } = useStoreState(
-    state => state.tableListModel.filter,
-  );
+  const filter = useStoreState(state => state.tableListModel.filter);
   const setFilter = useStoreActions(
     actions => actions.tableListModel.setFilter,
   );
+  const resetFilter = useStoreActions(
+    actions => actions.tableListModel.resetFilter,
+  );
+  const fetchServiceList = useStoreActions(
+    actions => actions.tableListModel.fetchServiceList,
+  );
+  const [state, fetch] = useAsyncFn(() => fetchServiceList());
+
+  useEffect(() => {
+    fetch();
+  }, [fetch, filter]);
 
   return (
     <div className={styles.wrap}>
+      <div className={styles.header}>
+        <Button type="primary">查询</Button>
+        <Button onClick={() => resetFilter()}>重置</Button>
+      </div>
       <Table
         columns={columns}
         dataSource={list}
+        loading={state.loading}
         pagination={{
           total,
-          pageSize,
-          current: page,
+          pageSize: filter.pageSize,
+          current: filter.page,
           showSizeChanger: true,
           onChange(curr) {
             setFilter({ page: curr });

@@ -1,5 +1,5 @@
 import Analysis from 'components/analysis';
-import TableList from 'components/TableList';
+import TableList from 'components/table-list';
 import { MenuDataItem } from 'layouts/BasicLayout';
 
 export const router: MenuDataItem[] = [
