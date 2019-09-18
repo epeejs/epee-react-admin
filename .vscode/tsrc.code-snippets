@@ -37,7 +37,7 @@
       "import request from 'utils/request';",
       "",
       "export const ${1:functionName} = () =>",
-      "  request<IResponseBody<any>>(Api);"
+      "  request<ResponseBody<any>>(Api);"
     ]
   },
   "ts react function component": {

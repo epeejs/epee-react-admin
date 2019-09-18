@@ -1,12 +1,15 @@
+import { dashboardModel, DashboardModel } from './dashboard.model';
 import { globalModel, GlobalModel } from './global.model';
-import { ReposModel, reposModel } from './repos.model';
+import { tableListModel, TableListModel } from './table-list.model';
 
 export interface StoreModel {
-  reposModel: ReposModel;
   globalModel: GlobalModel;
+  tableListModel: TableListModel;
+  dashboardModel: DashboardModel;
 }
 
 export const storeModel: StoreModel = {
-  reposModel,
   globalModel,
+  tableListModel,
+  dashboardModel,
 };

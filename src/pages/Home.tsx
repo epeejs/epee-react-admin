@@ -1,4 +1,4 @@
-import { Button, Icon } from 'antd';
+import { Icon } from 'antd';
 import { router } from 'constants/router';
 import { useStoreActions, useStoreState } from 'hooks';
 import BasicLayout from 'layouts/BasicLayout';
@@ -15,9 +15,11 @@ export default function Home(props: RouteComponentProps) {
   return (
     <BasicLayout menuData={router} collapsed={collapseMenu} {...props}>
       <div className={styles.header}>
-        <Button type="primary" onClick={() => setCollapseMenu(!collapseMenu)}>
-          <Icon type={collapseMenu ? 'menu-unfold' : 'menu-fold'} />
-        </Button>
+        <Icon
+          className={styles.btn_toggle}
+          type={collapseMenu ? 'menu-unfold' : 'menu-fold'}
+          onClick={() => setCollapseMenu(!collapseMenu)}
+        />
       </div>
     </BasicLayout>
   );

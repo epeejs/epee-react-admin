@@ -1,0 +1,15 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  margin: 24px 24px 0;
+  padding: 24px;
+  background-color: white;
+
+  .header {
+    margin-bottom: 24px;
+
+    > * {
+      margin-right: 16px;
+    }
+  }
+}

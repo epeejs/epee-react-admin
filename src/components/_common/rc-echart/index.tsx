@@ -40,16 +40,19 @@ export default function EChart({
       chartRef.current = chart;
     }, 100);
   });
+
   useUnmount(() => {
     if (chartRef.current) {
       chartRef.current.dispose();
     }
   });
+
   useEffect(() => {
     if (chartRef.current) {
       chartRef.current.setOption(option);
     }
   }, [option]);
+
   useEffect(() => {
     window.addEventListener('resize', resize);
 
@@ -57,6 +60,7 @@ export default function EChart({
       window.removeEventListener('resize', resize);
     };
   }, []);
+
   useEffect(() => {
     resize();
   }, [timestamp]);

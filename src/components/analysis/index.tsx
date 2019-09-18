@@ -1,7 +1,10 @@
-import { Card, Col, Row } from 'antd';
+import { Card, Col, Empty, Row, Spin } from 'antd';
 import BarChart from 'components/charts/BarChart';
-import { useStoreState } from 'hooks';
+import LineChart from 'components/charts/LineChart';
+import PieChart from 'components/charts/PieChart';
+import { useStoreActions, useStoreState } from 'hooks';
 import React, { useEffect, useState } from 'react';
+import { useAsyncFn, useMount } from 'react-use';
 import styles from './style/Analysis.module.scss';
 
 interface AnalysisProps {
@@ -11,7 +14,17 @@ interface AnalysisProps {
 export default function Analysis(props: AnalysisProps) {
   const collapseMenu = useStoreState(state => state.globalModel.collapseMenu);
   const [timestamp, setTimestamp] = useState(0);
+  const chartData = useStoreState(state => state.dashboardModel.chartData);
+  const { bar, pie, line } = chartData;
+  const fetchChartData = useStoreActions(
+    actions => actions.dashboardModel.fetchChartData,
+  );
+  const [state, fetch] = useAsyncFn(() => fetchChartData());
+  useMount(() => {
+    fetch();
+  });
 
+  // 监听侧边栏变化，传入时间戳到echart中
   useEffect(() => {
     setTimeout(() => {
       setTimestamp(Date.now());
@@ -21,16 +34,37 @@ export default function Analysis(props: AnalysisProps) {
   return (
     <div className={styles.wrap}>
       <Row gutter={16}>
-        <Col className="gutter-row" span={12}>
-          <Card title="执业类型分析" bordered={false}>
-            <BarChart timestamp={timestamp} />
+        <Col className="gutter-row" span={8}>
+          <Card title="半年度人流量分析" bordered={false}>
+            <Spin spinning={state.loading}>
+              {bar.length > 0 ? (
+                <BarChart timestamp={timestamp} practiceData={bar} />
+              ) : (
+                <Empty style={{ height: '300px' }} />
+              )}
+            </Spin>
           </Card>
         </Col>
-        <Col className="gutter-row" span={12}>
-          <Card title="执业类型分析" bordered={false}>
-            <p>Card content</p>
-            <p>Card content</p>
-            <p>Card content</p>
+        <Col className="gutter-row" span={8}>
+          <Card title="销售额类别占比" bordered={false}>
+            <Spin spinning={state.loading}>
+              {pie.length > 0 ? (
+                <PieChart timestamp={timestamp} ringData={pie} />
+              ) : (
+                <Empty style={{ height: '300px' }} />
+              )}
+            </Spin>
+          </Card>
+        </Col>
+        <Col className="gutter-row" span={8}>
+          <Card title="年度销售额分析" bordered={false}>
+            <Spin spinning={state.loading}>
+              {line.length > 0 ? (
+                <LineChart timestamp={timestamp} lineData={line} />
+              ) : (
+                <Empty style={{ height: '300px' }} />
+              )}
+            </Spin>
           </Card>
         </Col>
       </Row>

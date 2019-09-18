@@ -14,17 +14,8 @@ interface BarChartProps {
 }
 
 export default function BarChart(props: BarChartProps) {
-  const practiceData = [
-    { name: '内科', value: 12 },
-    { name: '儿科', value: 60 },
-    { name: '中医科', value: 2 },
-    { name: '妇科', value: 8 },
-    { name: '全科医学科', value: 5 },
-    { name: '其他', value: 38 },
-  ];
-
-  const names = _.map(practiceData, 'name');
-  const values = _.map(practiceData, 'value');
+  const names = _.map(props.practiceData, 'name');
+  const values = _.map(props.practiceData, 'value');
   const total = _.sum(values);
 
   const option: EChartOption = {
