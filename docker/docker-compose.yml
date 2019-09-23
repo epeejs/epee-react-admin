@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  epee-react-admin:
+    image: epee-react-admin
+    ports:
+      - 80:80
+    container_name: 'epee-react-admin'
+    restart: unless-stopped
+    volumes:
+      - ../build:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
