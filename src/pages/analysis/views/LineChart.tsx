@@ -1,6 +1,6 @@
-import * as _ from 'lodash';
+import EChart, { EChartOption } from 'components/rc-echart';
+import _ from 'lodash';
 import React from 'react';
-import EChart, { EChartOption } from '../_common/rc-echart';
 
 interface Value {
   name: string;

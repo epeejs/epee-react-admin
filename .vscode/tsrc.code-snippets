@@ -45,7 +45,7 @@
     "prefix": "tsrfc",
     "body": [
       "import React from 'react';",
-      "import styles from './style/${1:${TM_FILENAME_BASE}}.module.scss';",
+      "import styles from './${1:${TM_FILENAME_BASE}}.module.scss';",
       "",
       "interface ${1:${TM_FILENAME_BASE}}Props {",
       "  [key: string]: any;",

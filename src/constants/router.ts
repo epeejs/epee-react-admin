@@ -1,6 +1,7 @@
-import Analysis from 'components/analysis';
-import TableList from 'components/table-list';
 import { MenuDataItem } from 'layouts/BasicLayout';
+import Analysis from 'pages/analysis';
+import NewPage from 'pages/NewPage';
+import TableList from 'pages/table-list';
 
 export const router: MenuDataItem[] = [
   {
@@ -32,5 +33,11 @@ export const router: MenuDataItem[] = [
         name: '卡片列表',
       },
     ],
+  },
+  {
+    path: '/new',
+    name: '新页面',
+    icon: 'file',
+    component: NewPage,
   },
 ];

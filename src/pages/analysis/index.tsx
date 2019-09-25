@@ -1,11 +1,11 @@
 import { Card, Col, Empty, Row, Spin } from 'antd';
-import BarChart from 'components/charts/BarChart';
-import LineChart from 'components/charts/LineChart';
-import PieChart from 'components/charts/PieChart';
 import { useStoreActions, useStoreState } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
-import styles from './style/Analysis.module.scss';
+import styles from './index.module.scss';
+import BarChart from './views/BarChart';
+import LineChart from './views/LineChart';
+import PieChart from './views/PieChart';
 
 interface AnalysisProps {
   [key: string]: any;

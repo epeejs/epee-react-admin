@@ -13,13 +13,14 @@ const { Header, Sider, Content } = Layout;
 const { SubMenu, Item: MenuItem } = Menu;
 
 export type RouteType = Pick<RouteProps, 'component' | 'exact' | 'strict'> &
-  Omit<MenuDataItem, 'children' | 'routes'>;
+  Omit<MenuDataItem, 'children' | 'routes' | 'component'>;
 export interface MenuDataItem {
   path: string;
   name: string;
   icon?: string;
   hideInMenu?: boolean;
   children?: MenuDataItem[];
+  component?: React.ReactNode;
   routes?: RouteType[];
 }
 
@@ -66,7 +67,7 @@ function renderRoute(menu: MenuDataItem[]): any[] {
         : renderRoute(m.routes!);
     }
 
-    const { name, hideInMenu, icon, ...routeProps } = m as RouteType;
+    const { name, hideInMenu, icon, ...routeProps } = m as any;
 
     return <Route key={routeProps.path} {...routeProps} />;
   });
