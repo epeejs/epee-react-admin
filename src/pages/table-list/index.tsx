@@ -5,7 +5,7 @@ import moment from 'moment';
 import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useAsyncFn } from 'react-use';
-import styles from './style/TableList.module.scss';
+import styles from './index.module.scss';
 
 const status = ['关闭', '运行中', '已上线', '异常'];
 const statusMap = ['default', 'processing', 'success', 'error'];

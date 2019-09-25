@@ -1,5 +1,5 @@
+import EChart, { EChartOption } from 'components/rc-echart';
 import React from 'react';
-import EChart, { EChartOption } from '../_common/rc-echart';
 
 interface Value {
   name: string;
