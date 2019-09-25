@@ -109,7 +109,9 @@ export const router: MenuDataItem[] = [
 
 ### 引入数据流
 
-下面演示表格组件开发流程，
+> 状态管理使用 **easy-peasy**，更多用法参考[官方文档](https://easy-peasy.now.sh)
+
+下面演示表格组件开发流程
 
 1. 增加服务请求路径，修改 **constants/Api.ts** 文件
 
