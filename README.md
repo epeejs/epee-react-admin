@@ -1,11 +1,17 @@
+## 特性
+
+- 零配置
+- 无模版代码
+- 基于 React hooks
+- 完善的类型检查
+- docker 部署支持
+
 ## 开始
 
 ```sh
 yarn
 yarn start
 ```
-
-> 该项目使用 yarn 作为依赖管理工具，需要先安装 `npm i -g yarn`
 
 > 为了更好的开发体验，你还需要安装以下 VSCode 插件
 >
@@ -26,13 +32,13 @@ yarn start
 
 ### 目录结构
 
-```
+```sh
 ├── /.vscode/                    # vscode 配置目录，包含常用的代码片段、设置等
 ├── /@types/                     # 全局类型声明
 ├── /src/                        # 源码目录
 │ ├── /assets/                   # 静态资源目录
 │ ├── /components/               # 公共业务组件目录
-│ ├── /constants/                # 项目 constants 目录
+│ ├── /constants/                # constant 目录
 │ │ ├── _const.scss              # scss 常量
 │ │ └── Api.ts                   # API 常量
 │ │ └── store.ts                 # store
@@ -43,7 +49,7 @@ yarn start
 │ ├── /pages/                    # 页面组件目录
 │ ├── /services/                 # 请求服务目录
 │ ├── /style/                    # 全局样式
-│ ├── /utils/                    # utils 目录
+│ ├── /utils/                    # util 目录
 │ │ ├── request.ts               # 基于 fetch 封装的 http 请求工具
 │ │ ├── global.ts                # 公共方法库
 │ └── index.tsx                  # 项目入口
@@ -73,7 +79,7 @@ export default function NewPage(props: NewPageProps) {
 }
 ```
 
-可以键入 `tsrfc` 快速生成模板代码，后面直接在列出代码片段快捷键，不再说明
+可以键入 `tsrfc` 快速生成模板代码，后面直接列出代码片段快捷键，不再说明
 
 #### 2. 将页面加入路由
 
