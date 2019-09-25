@@ -1,12 +1,14 @@
-## 特性
+## 🚀 特性
 
-- 零配置
-- 无模版代码
-- 基于 React hooks
-- 完善的类型检查
-- docker 部署支持
+- 1️⃣ 零配置
+- 2️⃣ 无模版代码
+- 3️⃣ 基于 React hooks
+- 4️⃣ 完善的类型检查
+- 5️⃣ docker 部署支持
+- 6️⃣ 基于 easy-peasy 的状态管理
+- 7️⃣ [在线数据 mock](https://github.com/dobble11/epee-react-admin-ts/blob/master/简单的在线数据mock.md)
 
-## 开始
+## 🏃 开始
 
 ```sh
 yarn
@@ -28,7 +30,7 @@ yarn start
 > - **Path Intellisense**
 > - **ES7 React/Redux/GraphQL/React-Native snippets**
 
-## 目录结构
+## 🌳 目录结构
 
 ```sh
 ├── /.vscode/                    # vscode 配置目录，包含常用的代码片段、设置等
@@ -53,7 +55,7 @@ yarn start
 │ └── index.tsx                  # 项目入口
 ```
 
-## 开发
+## ⚒ 开发
 
 ### 新增页面
 
@@ -123,19 +125,33 @@ export const Api = {
 
 按照约定，路径名以大写及请求类型开头命名
 
-2. 新建 **models/table-list.mode.ts** 文件（快捷键：tsmode），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查
+2. 依据接口文档，编写请求服务，新建 **services/table-list.service.ts** 文件（快捷键：tsreq），修改内容：
+
+```ts
+import { Api } from 'constants/Api';
+import request from 'utils/request';
+
+export const getServiceList = (
+  filter: Omit<ServiceFilter, keyof PageParams>,
+  router: PageParams,
+) =>
+  request<ResponseBody<PageData<Service>>>(Api.POST_SERVICE_LIST, {
+    method: 'post',
+    router,
+    body: JSON.stringify(filter),
+  });
+```
+
+3. 新建 **models/table-list.mode.ts** 文件（快捷键：tsmode），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查
 
 ```ts
 import { Action, action, Thunk, thunk } from 'easy-peasy';
-import { getServiceList } from 'services/table-list.service';
+import {
+  getServiceList,
+  Service,
+  ServiceFilter,
+} from 'services/table-list.service';
 
-export interface Service {
-  avatar: string;
-}
-export interface ServiceFilter {
-  page: number;
-  pageSize: number;
-}
 export interface TableListModel {
   data: PageData<Service>;
   filter: ServiceFilter;
@@ -146,6 +162,8 @@ export interface TableListModel {
 }
 
 const initFilter: ServiceFilter = {
+  name: '',
+  updateDate: '',
   page: 1,
   pageSize: 10,
 };
@@ -186,24 +204,6 @@ export interface StoreModel {
 export const storeModel: StoreModel = {
 +  tableListModel,
 };
-```
-
-3. 依据接口文档，编写请求服务，新建 **services/table-list.service.ts** 文件（快捷键：tsreq），修改内容：
-
-```ts
-import { Api } from 'constants/Api';
-import { Service, ServiceFilter } from 'models/table-list.model';
-import request from 'utils/request';
-
-export const getServiceList = (
-  filter: Omit<ServiceFilter, keyof PageParams>,
-  router: PageParams,
-) =>
-  request<ResponseBody<PageData<Service>>>(Api.POST_SERVICE_LIST, {
-    method: 'post',
-    router,
-    body: JSON.stringify(filter),
-  });
 ```
 
 4. 业务组件使用 demo
