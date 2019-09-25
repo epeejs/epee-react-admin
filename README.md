@@ -28,9 +28,7 @@ yarn start
 > - **Path Intellisense**
 > - **ES7 React/Redux/GraphQL/React-Native snippets**
 
-## 项目结构
-
-### 目录结构
+## 目录结构
 
 ```sh
 ├── /.vscode/                    # vscode 配置目录，包含常用的代码片段、设置等
@@ -106,12 +104,161 @@ export const router: MenuDataItem[] = [
 ```
 
 修改好之后运行，可以看到如下效果
-[]
 
-### 新增公共业务组件
+![preview](https://github.com/dobble11/aseets/blob/master/newpage.png)
+
+### 引入数据流
+
+下面演示表格组件开发流程，
+
+1. 增加服务请求路径，修改 **constants/Api.ts** 文件
+
+```diff
+export const Api = {
++  POST_SERVICE_LIST: `${baseUrl}/service-list/pageSize/:pageSize/page/:page`,
+};
+```
+
+按照约定，路径名以大写及请求类型开头命名
+
+2. 新建 **models/table-list.mode.ts** 文件（快捷键：tsmode），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查
+
+```ts
+import { Action, action, Thunk, thunk } from 'easy-peasy';
+import { getServiceList } from 'services/table-list.service';
+
+export interface Service {
+  avatar: string;
+}
+export interface ServiceFilter {
+  page: number;
+  pageSize: number;
+}
+export interface TableListModel {
+  data: PageData<Service>;
+  filter: ServiceFilter;
+  setFilter: Action<TableListModel, Partial<ServiceFilter>>;
+  resetFilter: Action<TableListModel>;
+  setData: Action<TableListModel, PageData<Service>>;
+  fetchServiceList: Thunk<TableListModel>;
+}
+
+const initFilter: ServiceFilter = {
+  page: 1,
+  pageSize: 10,
+};
+
+export const tableListModel: TableListModel = {
+  data: {
+    list: [],
+    total: 0,
+  },
+  filter: initFilter,
+  setFilter: action((state, payload) => {
+    state.filter = { ...state.filter, ...payload };
+  }),
+  resetFilter: action(state => {
+    state.filter = initFilter;
+  }),
+  setData: action((state, payload) => {
+    state.data = payload;
+  }),
+  fetchServiceList: thunk(async (actions, payload, { getState }) => {
+    const { page, pageSize, ...otherFilter } = getState().filter;
+    const res = await getServiceList(otherFilter, { page, pageSize });
+
+    actions.setData(res.data);
+  }),
+};
+```
+
+引入 model，修改 **models/index.ts** 内容
+
+```diff
++import { tableListModel, TableListModel } from './table-list.model';
+
+export interface StoreModel {
++  tableListModel: TableListModel;
+}
+
+export const storeModel: StoreModel = {
++  tableListModel,
+};
+```
+
+3. 依据接口文档，编写请求服务，新建 **services/table-list.service.ts** 文件（快捷键：tsreq），修改内容：
+
+```ts
+import { Api } from 'constants/Api';
+import { Service, ServiceFilter } from 'models/table-list.model';
+import request from 'utils/request';
+
+export const getServiceList = (
+  filter: Omit<ServiceFilter, keyof PageParams>,
+  router: PageParams,
+) =>
+  request<ResponseBody<PageData<Service>>>(Api.POST_SERVICE_LIST, {
+    method: 'post',
+    router,
+    body: JSON.stringify(filter),
+  });
+```
+
+4. 业务组件使用 demo
+
+```tsx
+import { useStoreActions, useStoreState } from 'hooks';
+
+export default function TableList(props: TableListProps) {
+  const { total, list } = useStoreState(state => state.tableListModel.data);
+  const filter = useStoreState(state => state.tableListModel.filter);
+  const setFilter = useStoreActions(
+    actions => actions.tableListModel.setFilter,
+  );
+  const resetFilter = useStoreActions(
+    actions => actions.tableListModel.resetFilter,
+  );
+  const fetchServiceList = useStoreActions(
+    actions => actions.tableListModel.fetchServiceList,
+  );
+  const [state, fetch] = useAsyncFn(() => fetchServiceList());
+
+  useEffect(() => {
+    fetch();
+  }, [fetch, filter]);
+
+  return (
+    <div className={styles.wrap}>
+      <div className={styles.header}>
+        <Button onClick={() => resetFilter()}>重置</Button>
+      </div>
+      <Table
+        dataSource={list}
+        loading={state.loading}
+        pagination={{
+          total,
+          pageSize: filter.pageSize,
+          current: filter.page,
+          showSizeChanger: true,
+          onChange(curr) {
+            setFilter({ page: curr });
+          },
+          onShowSizeChange(curr, size) {
+            setFilter({ page: 1, pageSize: size });
+          },
+        }}
+      />
+    </div>
+  );
+}
+```
+
+### 公共业务组件
 
 对于一些可能被多处引用的功能模块，建议提炼成公共业务组件统一管理。这些组件一般有以下特征：
 
-- 只负责一块相对独立，稳定的功能；
-- 没有单独的路由配置；
-- 可能是纯静态的，也可能包含自己的 state，但不涉及 redux 的数据流，仅受父组件（通常是一个页面）传递的参数控制。
+- 只负责一块相对独立，稳定的功能
+- 没有单独的路由配置
+- 可能是纯静态的，也可能包含自己的 state，但不涉及 redux 的数据流，仅受父组件（通常是一个页面）传递的参数控制
+
+如 echart
