@@ -1,7 +1,7 @@
 import { Card, Col, Empty, Row, Spin } from 'antd';
-import { useStoreActions, useStoreState } from 'hooks';
 import React, { useEffect, useState } from 'react';
 import { useAsyncFn, useMount } from 'react-use';
+import { useStoreActions, useStoreState } from 'src/hooks';
 import styles from './index.module.scss';
 import BarChart from './views/BarChart';
 import LineChart from './views/LineChart';

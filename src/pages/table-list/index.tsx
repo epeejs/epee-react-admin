@@ -1,10 +1,10 @@
 import { Badge, Button, Divider, Table } from 'antd';
 import { ColumnProps } from 'antd/lib/table';
-import { useStoreActions, useStoreState } from 'hooks';
 import moment from 'moment';
 import React, { useEffect } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useAsyncFn } from 'react-use';
+import { useStoreActions, useStoreState } from 'src/hooks';
 import styles from './index.module.scss';
 
 const status = ['关闭', '运行中', '已上线', '异常'];

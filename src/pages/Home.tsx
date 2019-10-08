@@ -1,9 +1,9 @@
 import { Icon } from 'antd';
-import { router } from 'constants/router';
-import { useStoreActions, useStoreState } from 'hooks';
-import BasicLayout from 'layouts/BasicLayout';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { router } from 'src/constants/router';
+import { useStoreActions, useStoreState } from 'src/hooks';
+import BasicLayout from 'src/layouts/BasicLayout';
 import styles from './Home.module.scss';
 
 export default function Home(props: RouteComponentProps) {

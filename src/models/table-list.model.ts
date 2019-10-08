@@ -3,7 +3,7 @@ import {
   getServiceList,
   Service,
   ServiceFilter,
-} from 'services/table-list.service';
+} from 'src/services/table-list.service';
 
 export interface TableListModel {
   data: PageData<Service>;
