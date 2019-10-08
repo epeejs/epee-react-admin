@@ -1,5 +1,5 @@
-import { Api } from 'constants/Api';
-import request from 'utils/request';
+import { Api } from 'src/constants/Api';
+import request from 'src/utils/request';
 
 export interface Service {
   avatar: string;

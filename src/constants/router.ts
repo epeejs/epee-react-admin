@@ -1,7 +1,7 @@
-import { MenuDataItem } from 'layouts/BasicLayout';
-import Analysis from 'pages/analysis';
-import NewPage from 'pages/NewPage';
-import TableList from 'pages/table-list';
+import { MenuDataItem } from 'src/layouts/BasicLayout';
+import Analysis from 'src/pages/analysis';
+import NewPage from 'src/pages/NewPage';
+import TableList from 'src/pages/table-list';
 
 export const router: MenuDataItem[] = [
   {

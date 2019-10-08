@@ -1,5 +1,5 @@
 import { Action, action, Thunk, thunk } from 'easy-peasy';
-import { getChartData } from 'services/dashboard.service';
+import { getChartData } from 'src/services/dashboard.service';
 
 interface Value {
   name: string;

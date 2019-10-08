@@ -1,7 +1,7 @@
-import EChart, { EChartOption } from 'components/rc-echart';
 import * as echarts from 'echarts/lib/echarts';
 import _ from 'lodash';
 import React from 'react';
+import EChart, { EChartOption } from 'src/components/rc-echart';
 
 interface Value {
   name: string;

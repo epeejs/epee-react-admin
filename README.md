@@ -1,12 +1,12 @@
 ## 🚀 特性
 
-- 1️⃣ 零配置
-- 2️⃣ 无模版代码
-- 3️⃣ 基于 React hooks
-- 4️⃣ 完善的类型检查
-- 5️⃣ docker 部署支持
-- 6️⃣ 基于 easy-peasy 的状态管理
-- 7️⃣ [在线数据 mock](https://github.com/dobble11/epee-react-admin-ts/blob/master/简单的在线数据mock.md)
+- 零配置
+- 无模版代码
+- 基于 React hooks
+- 完善的类型检查
+- docker 部署支持
+- 基于 easy-peasy 的状态管理
+- [在线数据 mock](https://github.com/dobble11/epee-react-admin-ts/blob/master/docs/简单的在线数据mock.md)
 
 ## 🏃 开始
 
@@ -83,7 +83,7 @@ export default function NewPage(props: NewPageProps) {
 
 #### 2. 将页面加入路由
 
-修改 **constants/router.ts** 内容
+修改 **src/constants/router.ts** 内容
 
 ```diff
 export const router: MenuDataItem[] = [
@@ -115,7 +115,7 @@ export const router: MenuDataItem[] = [
 
 下面演示表格组件开发流程
 
-1. 增加服务请求路径，修改 **constants/Api.ts** 文件
+1. 增加服务请求路径，修改 **src/constants/Api.ts** 文件
 
 ```diff
 export const Api = {
@@ -128,8 +128,8 @@ export const Api = {
 2. 依据接口文档，编写请求服务，新建 **services/table-list.service.ts** 文件（快捷键：tsreq），修改内容：
 
 ```ts
-import { Api } from 'constants/Api';
-import request from 'utils/request';
+import { Api } from 'src/constants/Api';
+import request from 'src/utils/request';
 
 export const getServiceList = (
   filter: Omit<ServiceFilter, keyof PageParams>,
@@ -150,7 +150,7 @@ import {
   getServiceList,
   Service,
   ServiceFilter,
-} from 'services/table-list.service';
+} from 'src/services/table-list.service';
 
 export interface TableListModel {
   data: PageData<Service>;
@@ -209,7 +209,7 @@ export const storeModel: StoreModel = {
 4. 业务组件使用 demo
 
 ```tsx
-import { useStoreActions, useStoreState } from 'hooks';
+import { useStoreActions, useStoreState } from 'src/hooks';
 
 export default function TableList(props: TableListProps) {
   const { total, list } = useStoreState(state => state.tableListModel.data);

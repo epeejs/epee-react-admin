@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": ".",
     "target": "es6",
     "lib": ["dom", "esnext"],
     "allowJs": true,

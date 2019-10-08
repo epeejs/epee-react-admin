@@ -1,7 +1,7 @@
 import { createStore } from 'easy-peasy';
-import { storeModel } from 'models';
 import { Middleware } from 'redux';
 import logger from 'redux-logger';
+import { storeModel } from 'src/models';
 
 const middlewares: Middleware[] = [];
 
