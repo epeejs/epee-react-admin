@@ -69,6 +69,7 @@
     "default-case": "error",
     "no-shadow": "error",
     "generator-star-spacing": ["warn", "after"],
-    "yield-star-spacing": ["warn", "after"]
+    "yield-star-spacing": ["warn", "after"],
+    "spaced-comment": "warn"
   }
 }
