@@ -1,9 +1,9 @@
-import { MenuDataItem } from 'src/layouts/BasicLayout';
+import { RouterNode } from 'src/layouts/BasicLayout';
 import Analysis from 'src/pages/analysis';
 import NewPage from 'src/pages/NewPage';
 import TableList from 'src/pages/table-list';
 
-export const router: MenuDataItem[] = [
+export const router: RouterNode[] = [
   {
     path: '/dashboard',
     name: 'Dashboard',
@@ -32,6 +32,16 @@ export const router: MenuDataItem[] = [
         path: '/list/card-list',
         name: '卡片列表',
       },
+      {
+        path: '/list/search',
+        name: '搜索列表',
+        routes: [
+          {
+            path: '/list/search/articles',
+            name: '搜索列表（文章）',
+          },
+        ],
+      },
     ],
   },
   {
@@ -39,5 +49,10 @@ export const router: MenuDataItem[] = [
     name: '新页面',
     icon: 'file',
     component: NewPage,
+  },
+  {
+    path: '/',
+    redirect: '/dashboard/analysis',
+    hideInMenu: true,
   },
 ];

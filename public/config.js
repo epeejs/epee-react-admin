@@ -1,5 +1,5 @@
 window.config = {
   version: 'develop',
-  systemName: '',
+  systemName: 'Epee Admin',
   debug: true,
 };

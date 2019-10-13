@@ -13,7 +13,7 @@ export default function Home(props: RouteComponentProps) {
   );
 
   return (
-    <BasicLayout menuData={router} collapsed={collapseMenu} {...props}>
+    <BasicLayout router={router} collapsed={collapseMenu} {...props}>
       <div className={styles.header}>
         <Icon
           className={styles.btn_toggle}

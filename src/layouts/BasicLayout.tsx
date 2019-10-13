@@ -2,9 +2,10 @@ import { Icon, Layout, Menu } from 'antd';
 import _ from 'lodash';
 import React from 'react';
 import {
+  Link,
+  Redirect,
   Route,
   RouteComponentProps,
-  RouteProps,
   Switch,
 } from 'react-router-dom';
 import styles from './BasicLayout.module.scss';
@@ -12,24 +13,24 @@ import styles from './BasicLayout.module.scss';
 const { Header, Sider, Content } = Layout;
 const { SubMenu, Item: MenuItem } = Menu;
 
-export type RouteType = Pick<RouteProps, 'component' | 'exact' | 'strict'> &
-  Omit<MenuDataItem, 'children' | 'routes' | 'component'>;
-export interface MenuDataItem {
+export interface RouterNode {
   path: string;
-  name: string;
+  name?: string;
   icon?: string;
+  redirect?: string;
   hideInMenu?: boolean;
-  children?: MenuDataItem[];
-  component?: React.ReactNode;
-  routes?: RouteType[];
+  /** 是否是布局组件 */
+  layout?: boolean;
+  component?: React.ComponentType<any>;
+  routes?: RouterNode[];
 }
 
-function renderMenu(menu: MenuDataItem[]) {
-  return menu.map(m => {
+function renderMenu(nodes: RouterNode[]) {
+  return nodes.map(m => {
     if (m.hideInMenu) {
       return null;
     }
-    if (!_.isEmpty(m.children) || !_.isEmpty(m.routes)) {
+    if (!_.isEmpty(m.routes)) {
       return (
         <SubMenu
           key={m.path}
@@ -40,9 +41,7 @@ function renderMenu(menu: MenuDataItem[]) {
             </span>
           }
         >
-          {!_.isEmpty(m.children)
-            ? renderMenu(m.children!)
-            : renderMenu(m.routes!)}
+          {renderMenu(m.routes!)}
         </SubMenu>
       );
     }
@@ -56,31 +55,33 @@ function renderMenu(menu: MenuDataItem[]) {
   });
 }
 
-function renderRoute(menu: MenuDataItem[]): any[] {
+function renderRoute(menu: RouterNode[]): any[] {
   return menu.map(m => {
-    if (m.hideInMenu) {
-      return null;
-    }
-    if (!_.isEmpty(m.children) || !_.isEmpty(m.routes)) {
-      return !_.isEmpty(m.children)
-        ? renderRoute(m.children!)
-        : renderRoute(m.routes!);
+    if (!_.isEmpty(m.routes)) {
+      return renderRoute(m.routes!);
     }
 
-    const { name, hideInMenu, icon, ...routeProps } = m as any;
+    const { redirect, path, component } = m;
 
-    return <Route key={routeProps.path} {...routeProps} />;
+    return (
+      <Route
+        key={path}
+        path={path}
+        // eslint-disable-next-line react/display-name
+        component={redirect ? () => <Redirect to={redirect} /> : component}
+      />
+    );
   });
 }
 
 interface BasicLayoutProps extends RouteComponentProps {
-  menuData: MenuDataItem[];
+  router: RouterNode[];
   collapsed?: boolean;
   children?: React.ReactNode;
 }
 
 export default function BasicLayout({
-  menuData,
+  router,
   history,
   location: { pathname },
   children,
@@ -92,21 +93,25 @@ export default function BasicLayout({
   return (
     <Layout>
       <Sider width={256} collapsed={collapsed}>
-        <div className={styles.logo}>Epee Admin</div>
-        <Menu
-          mode="inline"
-          theme="dark"
-          defaultOpenKeys={openKeys}
-          selectedKeys={[pathname]}
-          onSelect={param => history.push(param.key)}
-        >
-          {renderMenu(menuData)}
-        </Menu>
+        <div className={styles.logo}>
+          <Link to="/"> {window.config.systemName}</Link>
+        </div>
+        {pathname !== '/' && (
+          <Menu
+            mode="inline"
+            theme="dark"
+            defaultOpenKeys={openKeys}
+            selectedKeys={[pathname]}
+            onSelect={param => history.push(param.key)}
+          >
+            {renderMenu(router)}
+          </Menu>
+        )}
       </Sider>
       <Layout>
         <Header style={{ padding: 0 }}>{children}</Header>
         <Content>
-          <Switch>{_.flattenDeep(renderRoute(menuData))}</Switch>
+          <Switch>{_.flattenDeep(renderRoute(router))}</Switch>
         </Content>
       </Layout>
     </Layout>

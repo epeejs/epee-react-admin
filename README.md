@@ -2,10 +2,10 @@
 
 - 零配置
 - 无模版代码
-- 基于 React hooks
-- 完善的类型检查
-- docker 部署支持
+- 使用 React Hook 开发
 - 基于 easy-peasy 的状态管理
+- 完善的类型检查及 lint 规则，保证代码风格的一致及质量
+- docker 部署支持
 - [在线数据 mock](https://github.com/dobble11/epee-react-admin-ts/blob/master/docs/简单的在线数据mock.md)
 
 ## 🏃 开始
@@ -83,7 +83,7 @@ export default function NewPage(props: NewPageProps) {
 
 #### 2. 将页面加入路由
 
-修改 **src/constants/router.ts** 内容
+修改 **constants/router.ts** 内容
 
 ```diff
 export const router: MenuDataItem[] = [
@@ -115,7 +115,7 @@ export const router: MenuDataItem[] = [
 
 下面演示表格组件开发流程
 
-1. 增加服务请求路径，修改 **src/constants/Api.ts** 文件
+1. 增加服务请求路径，修改 **constants/Api.ts** 文件
 
 ```diff
 export const Api = {
