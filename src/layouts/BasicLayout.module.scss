@@ -1,10 +1,19 @@
+@import '~src/constants/const';
+
 .logo {
   height: 64px;
-  margin: 0 0 0 24px;
+  margin: 0 0 0 $page-margin;
   overflow: hidden;
-  color: #fff;
-  font-weight: 600;
-  font-size: 20px;
-  font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-  line-height: 64px;
+
+  > a {
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
+    line-height: 64px;
+
+    &:hover {
+      color: white;
+    }
+  }
 }

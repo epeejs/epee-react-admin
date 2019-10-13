@@ -1,8 +1,4 @@
-/**
- * 获取图片base64格式
- * @param url
- * @param callback
- */
+/** 获取图片base64格式 */
 export function imgToBase64(
   url: string,
   callback: (result: string | ArrayBuffer | null) => void,
