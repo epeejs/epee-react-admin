@@ -1,3 +1,10 @@
+## 预览
+
+水平布局 (master)：https://epee.netlify.com/
+![hlayout](https://github.com/dobble11/aseets/blob/master/hlayout.png)
+垂直布局 (dev-vertical-layout)：https://vepee.netlify.com/
+![hlayout](https://github.com/dobble11/aseets/blob/master/vlayout.png)
+
 ## 🚀 特性
 
 - 零配置
@@ -264,3 +271,5 @@ export default function TableList(props: TableListProps) {
 - 可能是纯静态的，也可能包含自己的 state，但不涉及 redux 的数据流，仅受父组件（通常是一个页面）传递的参数控制
 
 如 echart
+
+### 布局与路由
