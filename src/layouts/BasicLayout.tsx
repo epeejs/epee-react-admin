@@ -19,8 +19,6 @@ export interface RouterNode {
   icon?: string;
   redirect?: string;
   hideInMenu?: boolean;
-  /** 是否是布局组件 */
-  layout?: boolean;
   component?: React.ComponentType<any>;
   routes?: RouterNode[];
 }
