@@ -1,58 +1,89 @@
 import { RouterNode } from 'src/layouts/BasicLayout';
-import Analysis from 'src/pages/analysis';
-import NewPage from 'src/pages/NewPage';
-import TableList from 'src/pages/table-list';
+import SettingLayout from 'src/layouts/SettingLayout';
+import GoodsAdd from 'src/pages/GoodsAdd';
+import GoodsList from 'src/pages/GoodsList';
 
 export const router: RouterNode[] = [
   {
-    path: '/dashboard',
-    name: 'Dashboard',
-    icon: 'dashboard',
-    routes: [
-      { path: '/dashboard/analysis', name: '分析页', component: Analysis },
-    ],
-  },
-  {
-    path: '/form',
-    name: '表单页',
-    icon: 'form',
-    routes: [{ path: '/form/basic-form', name: '基础表单' }],
-  },
-  {
-    path: '/list',
-    name: '列表页',
-    icon: 'table',
+    path: '/goods',
+    name: '商品管理',
+    redirect: '/goods/list',
     routes: [
       {
-        path: '/list/table-list',
-        name: '查询表格',
-        component: TableList,
+        path: '/goods/list',
+        name: '商品列表',
+        component: GoodsList,
       },
       {
-        path: '/list/card-list',
-        name: '卡片列表',
+        path: '/goods/add',
+        name: '新建商品',
+        component: GoodsAdd,
       },
       {
-        path: '/list/search',
-        name: '搜索列表',
-        routes: [
-          {
-            path: '/list/search/articles',
-            name: '搜索列表（文章）',
-          },
-        ],
+        path: '/goods/edit/:id',
+        name: '编辑商品',
       },
     ],
   },
   {
-    path: '/new',
-    name: '新页面',
-    icon: 'file',
-    component: NewPage,
+    path: '/store',
+    name: '店铺管理',
+    redirect: '/store/list',
+    routes: [
+      { path: '/store/list', name: '店铺列表' },
+      {
+        path: '/store/add',
+        name: '新建店铺',
+      },
+    ],
+  },
+  {
+    path: '/user',
+    name: '用户管理',
+    redirect: '/user/list',
+    routes: [
+      {
+        path: '/user/list',
+        name: '用户列表',
+      },
+      {
+        path: '/user/add',
+        name: '新增用户',
+      },
+    ],
+  },
+  {
+    path: '/setting/:item',
+    name: '系统设置',
+    hideInMenu: true,
+    layout: true,
+    component: SettingLayout,
+    routes: [
+      {
+        path: '/setting/account',
+        name: '帐号管理',
+      },
+      {
+        path: '/setting/device',
+        name: '设备管理',
+      },
+      {
+        path: '/setting/org',
+        name: '组织管理',
+      },
+      {
+        path: '/setting/label',
+        name: '标签管理',
+      },
+      {
+        path: '/setting/template',
+        name: '模版管理',
+      },
+    ],
   },
   {
     path: '/',
-    redirect: '/dashboard/analysis',
+    redirect: '/goods/list',
     hideInMenu: true,
   },
 ];

@@ -1,19 +1,43 @@
 @import '~src/constants/const';
 
 .logo {
-  height: 64px;
-  margin: 0 0 0 $page-margin;
-  overflow: hidden;
+  width: 30px;
+  height: 30px;
+  background: url(../assets/images/logo.png) no-repeat;
+  background-size: 100%;
+}
 
-  > a {
-    color: #fff;
-    font-weight: 600;
-    font-size: 20px;
-    font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-    line-height: 64px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
 
-    &:hover {
-      color: white;
+.left {
+  display: flex;
+  align-items: center;
+
+  > span {
+    font-size: 18px;
+  }
+}
+
+.right {
+  display: flex;
+
+  :global {
+    .ant-menu-item {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 16px;
+    }
+
+    .ant-menu-item-selected {
+      color: $primary-color;
+      background-color: transparent !important;
+    }
+
+    .ant-menu-item-selected:hover {
+      color: $primary-color;
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Icon, Layout, Menu } from 'antd';
+import { Divider, Layout, Menu } from 'antd';
 import _ from 'lodash';
 import React from 'react';
 import {
@@ -6,77 +6,28 @@ import {
   Redirect,
   Route,
   RouteComponentProps,
+  RouteProps,
   Switch,
 } from 'react-router-dom';
 import styles from './BasicLayout.module.scss';
 
-const { Header, Sider, Content } = Layout;
-const { SubMenu, Item: MenuItem } = Menu;
+const { Header, Content } = Layout;
+const { Item: MenuItem } = Menu;
 
+export type RouteType = Pick<RouteProps, 'exact' | 'strict'> &
+  Pick<RouterNode, 'path' | 'name' | 'redirect' | 'component'>;
 export interface RouterNode {
   path: string;
   name?: string;
-  icon?: string;
   redirect?: string;
   hideInMenu?: boolean;
-  /** 是否是布局组件 */
   layout?: boolean;
   component?: React.ComponentType<any>;
-  routes?: RouterNode[];
-}
-
-function renderMenu(nodes: RouterNode[]) {
-  return nodes.map(m => {
-    if (m.hideInMenu) {
-      return null;
-    }
-    if (!_.isEmpty(m.routes)) {
-      return (
-        <SubMenu
-          key={m.path}
-          title={
-            <span>
-              {m.icon && <Icon type={m.icon} />}
-              <span>{m.name}</span>
-            </span>
-          }
-        >
-          {renderMenu(m.routes!)}
-        </SubMenu>
-      );
-    }
-
-    return (
-      <MenuItem key={m.path}>
-        {m.icon && <Icon type={m.icon} />}
-        <span>{m.name}</span>
-      </MenuItem>
-    );
-  });
-}
-
-function renderRoute(menu: RouterNode[]): any[] {
-  return menu.map(m => {
-    if (!_.isEmpty(m.routes)) {
-      return renderRoute(m.routes!);
-    }
-
-    const { redirect, path, component } = m;
-
-    return (
-      <Route
-        key={path}
-        path={path}
-        // eslint-disable-next-line react/display-name
-        component={redirect ? () => <Redirect to={redirect} /> : component}
-      />
-    );
-  });
+  routes?: RouteType[];
 }
 
 interface BasicLayoutProps extends RouteComponentProps {
   router: RouterNode[];
-  collapsed?: boolean;
   children?: React.ReactNode;
 }
 
@@ -85,35 +36,92 @@ export default function BasicLayout({
   history,
   location: { pathname },
   children,
-  collapsed = false,
 }: BasicLayoutProps) {
-  const paths = _.dropRight(pathname.split('/'), 1);
-  const openKeys = paths.map((m, i) => _.take(paths, i + 1).join('/'));
+  const openKey = '/' + pathname.split('/')[1];
 
   return (
     <Layout>
-      <Sider width={256} collapsed={collapsed}>
-        <div className={styles.logo}>
-          <Link to="/"> {window.config.systemName}</Link>
+      <Header className={styles.header}>
+        <div className={styles.left}>
+          <Link className={styles.logo} to="/" />
+          <Divider type="vertical" style={{ height: 20 }} />
+          <span>{window.config.systemName}</span>
         </div>
-        {pathname !== '/' && (
+        <div className={styles.right}>
           <Menu
-            mode="inline"
             theme="dark"
-            defaultOpenKeys={openKeys}
-            selectedKeys={[pathname]}
-            onSelect={param => history.push(param.key)}
+            mode="horizontal"
+            selectedKeys={[openKey]}
+            style={{ lineHeight: '64px' }}
+            onSelect={param => {
+              const item = router.find(m => m.path === param.key && m.redirect);
+
+              // need redirect
+              if (item) {
+                history.push(item.redirect!);
+              } else {
+                history.push(param.key);
+              }
+            }}
           >
-            {renderMenu(router)}
+            {router
+              .filter(m => !m.hideInMenu)
+              .map(m => (
+                <MenuItem key={m.path}>{m.name}</MenuItem>
+              ))}
           </Menu>
-        )}
-      </Sider>
-      <Layout>
-        <Header style={{ padding: 0 }}>{children}</Header>
-        <Content>
-          <Switch>{_.flattenDeep(renderRoute(router))}</Switch>
-        </Content>
-      </Layout>
+          {children}
+        </div>
+      </Header>
+      <Content>
+        <Switch>
+          {router
+            .map(m => {
+              const {
+                name,
+                hideInMenu,
+                path,
+                routes,
+                layout,
+                redirect,
+                component: Component,
+                ...routeProps
+              } = m;
+
+              // handle setting
+              if (layout && Component && !_.isEmpty(routes)) {
+                return (
+                  <Route
+                    key={path}
+                    path={path}
+                    component={(props: RouteComponentProps) => (
+                      <Component routes={routes} {...props} />
+                    )}
+                    {...routeProps}
+                  />
+                );
+              }
+              if (!_.isEmpty(routes)) {
+                return m.routes!.map(r => <Route key={r.path} {...r} />);
+              }
+
+              return (
+                <Route
+                  key={path}
+                  path={path}
+                  component={
+                    redirect
+                      ? // eslint-disable-next-line react/display-name
+                        () => <Redirect to={redirect} />
+                      : Component
+                  }
+                  {...routeProps}
+                />
+              );
+            })
+            .flat()}
+        </Switch>
+      </Content>
     </Layout>
   );
 }

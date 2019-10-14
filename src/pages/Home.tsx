@@ -1,26 +1,31 @@
-import { Icon } from 'antd';
+import { Avatar, Dropdown, Menu } from 'antd';
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import { router } from 'src/constants/router';
-import { useStoreActions, useStoreState } from 'src/hooks';
 import BasicLayout from 'src/layouts/BasicLayout';
 import styles from './Home.module.scss';
 
 export default function Home(props: RouteComponentProps) {
-  const collapseMenu = useStoreState(state => state.globalModel.collapseMenu);
-  const setCollapseMenu = useStoreActions(
-    actions => actions.globalModel.setCollapseMenu,
-  );
-
   return (
-    <BasicLayout router={router} collapsed={collapseMenu} {...props}>
-      <div className={styles.header}>
-        <Icon
-          className={styles.btn_toggle}
-          type={collapseMenu ? 'menu-unfold' : 'menu-fold'}
-          onClick={() => setCollapseMenu(!collapseMenu)}
-        />
-      </div>
+    <BasicLayout router={router} {...props}>
+      <Dropdown
+        className={styles.pop}
+        overlay={
+          <Menu>
+            <Menu.Item>
+              <Link to="/setting/account">系统设置</Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link to="/">个人中心</Link>
+            </Menu.Item>
+          </Menu>
+        }
+      >
+        <div>
+          <Avatar icon="user" />
+          <span className={styles.user_name}>Scott Anderson</span>
+        </div>
+      </Dropdown>
     </BasicLayout>
   );
 }
