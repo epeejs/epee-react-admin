@@ -1,9 +1,11 @@
-## 预览
+## 💡 预览
 
 水平布局 (master)：https://epee.netlify.com/
+
 ![hlayout](https://github.com/dobble11/aseets/blob/master/hlayout.png)
 垂直布局 (dev-vertical-layout)：https://vepee.netlify.com/
-![hlayout](https://github.com/dobble11/aseets/blob/master/vlayout.png)
+
+![vlayout](https://github.com/dobble11/aseets/blob/master/vlayout.png)
 
 ## 🚀 特性
 
