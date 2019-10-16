@@ -1,10 +1,9 @@
 ## 💡 预览
 
 水平布局 (master)：https://epee.netlify.com/
-
 ![hlayout](https://github.com/dobble11/aseets/blob/master/hlayout.png)
-垂直布局 (dev-vertical-layout)：https://vepee.netlify.com/
 
+垂直布局 (dev-vertical-layout)：https://vepee.netlify.com/
 ![vlayout](https://github.com/dobble11/aseets/blob/master/vlayout.png)
 
 ## 🚀 特性
@@ -63,6 +62,7 @@ yarn start
 │ │ ├── global.ts                # 公共方法库
 │ └── index.tsx                  # 项目入口
 ```
+## 布局与路由
 
 ## ⚒ 开发
 
@@ -274,4 +274,4 @@ export default function TableList(props: TableListProps) {
 
 如 echart
 
-### 布局与路由
+
