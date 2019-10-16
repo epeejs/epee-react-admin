@@ -7,6 +7,7 @@ import 'moment/locale/zh-cn';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import PrivateRoute from './components/private-route';
 import { store } from './constants/store';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -20,7 +21,7 @@ ReactDOM.render(
       <Router>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/" component={Home} />
+          <PrivateRoute validate={() => true} path="/" component={Home} />
         </Switch>
       </Router>
     </StoreProvider>

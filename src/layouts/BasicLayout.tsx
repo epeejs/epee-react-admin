@@ -23,8 +23,8 @@ export interface RouterNode {
   routes?: RouterNode[];
 }
 
-function renderMenu(nodes: RouterNode[]) {
-  return nodes.map(m => {
+function renderMenu(router: RouterNode[]) {
+  return router.map(m => {
     if (m.hideInMenu) {
       return null;
     }
@@ -53,8 +53,8 @@ function renderMenu(nodes: RouterNode[]) {
   });
 }
 
-function renderRoute(menu: RouterNode[]): any[] {
-  return menu.map(m => {
+function renderRoute(router: RouterNode[]): any[] {
+  return router.map(m => {
     if (!_.isEmpty(m.routes)) {
       return renderRoute(m.routes!);
     }

@@ -57,6 +57,7 @@ function Login({ form, history }: LoginProps) {
             type="primary"
             htmlType="submit"
             className="login-form-button"
+            onClick={() => history.replace('/')}
           >
             Log in
           </Button>
