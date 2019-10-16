@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { Link } from 'react-router-dom';
 import styles from './GoodsList.module.scss';
 
 interface GoodsListProps extends RouteComponentProps {
@@ -12,9 +13,9 @@ export default function GoodsList(props: GoodsListProps) {
     <div className={styles.wrap}>
       <div className={styles.header}>
         <h5>标题</h5>
-        <Button type="primary" onClick={() => props.history.push('/goods/add')}>
-          新建商品
-        </Button>
+        <Link to="/goods/add">
+          <Button type="primary">新建商品</Button>
+        </Link>
       </div>
 
       <div className={styles.body}>Content</div>

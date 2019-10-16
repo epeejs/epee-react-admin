@@ -9,7 +9,6 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { store } from './constants/store';
 import Home from './pages/Home';
-import Login from './pages/Login';
 import './style/global.css';
 
 moment.locale('zh-cn');
@@ -19,7 +18,6 @@ ReactDOM.render(
     <StoreProvider store={store}>
       <Router>
         <Switch>
-          <Route path="/login" component={Login} />
           <Route path="/" component={Home} />
         </Switch>
       </Router>
