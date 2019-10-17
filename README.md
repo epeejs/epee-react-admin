@@ -10,7 +10,7 @@
 
 - 零配置
 - 无模版代码
-- 使用 React Hook 开发
+- 使用 React Hooks 开发
 - 基于 easy-peasy 的状态管理
 - 完善的类型检查及 lint 规则，保证代码风格的一致及质量
 - docker 部署支持

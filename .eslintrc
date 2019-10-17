@@ -68,8 +68,11 @@
     "array-callback-return": "error",
     "default-case": "error",
     "no-shadow": "error",
+    "no-return-await": "error",
+    "no-await-in-loop": "error",
+    "require-await": "error",
     "generator-star-spacing": ["warn", "after"],
     "yield-star-spacing": ["warn", "after"],
-    "spaced-comment": "warn"
+    "spaced-comment": ["warn", "always", { "markers": ["/"] }]
   }
 }
