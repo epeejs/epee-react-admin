@@ -154,11 +154,7 @@ export const getServiceList = (
 
 ```ts
 import { Action, action, Thunk, thunk } from 'easy-peasy';
-import {
-  getServiceList,
-  Service,
-  ServiceFilter,
-} from 'src/services/table-list.service';
+import { getServiceList } from 'src/services/table-list.service';
 
 export interface TableListModel {
   data: PageData<Service>;
@@ -182,6 +178,7 @@ export const tableListModel: TableListModel = {
     total: 0,
   },
   filter: initFilter,
+  // 快捷键：act
   setFilter: action((state, payload) => {
     state.filter = { ...state.filter, ...payload };
   }),
@@ -191,6 +188,7 @@ export const tableListModel: TableListModel = {
   setData: action((state, payload) => {
     state.data = payload;
   }),
+  // 快捷键：thunk
   fetchServiceList: thunk(async (actions, payload, { getState }) => {
     const { page, pageSize, ...otherFilter } = getState().filter;
     const res = await getServiceList(otherFilter, { page, pageSize });
@@ -222,20 +220,14 @@ import { useStoreActions, useStoreState } from 'src/hooks';
 export default function TableList(props: TableListProps) {
   const { total, list } = useStoreState(state => state.tableListModel.data);
   const filter = useStoreState(state => state.tableListModel.filter);
-  const setFilter = useStoreActions(
-    actions => actions.tableListModel.setFilter,
+  const { setFilter, resetFilter, fetchServiceList } = useStoreActions(
+    actions => actions.tableListModel,
   );
-  const resetFilter = useStoreActions(
-    actions => actions.tableListModel.resetFilter,
-  );
-  const fetchServiceList = useStoreActions(
-    actions => actions.tableListModel.fetchServiceList,
-  );
-  const [state, fetch] = useAsyncFn(() => fetchServiceList());
+  const [state, fetch] = useAsyncFn(() => fetchServiceList(), [filter]);
 
   useEffect(() => {
     fetch();
-  }, [fetch, filter]);
+  }, [fetch]);
 
   return (
     <div className={styles.wrap}>

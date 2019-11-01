@@ -1,10 +1,27 @@
 import { Action, action, Thunk, thunk } from 'easy-peasy';
-import {
-  getServiceList,
-  Service,
-  ServiceFilter,
-} from 'src/services/table-list.service';
+import { getServiceList } from 'src/services/table-list.service';
 
+export interface Service {
+  avatar: string;
+  callNo: number;
+  createdAt: string;
+  desc: string;
+  disabled: boolean;
+  href: string;
+  key: number;
+  name: string;
+  owner: string;
+  progress: number;
+  status: number;
+  title: string;
+  updatedAt: string;
+}
+export interface ServiceFilter {
+  name: string;
+  updateDate: string;
+  page: number;
+  pageSize: number;
+}
 export interface TableListModel {
   data: PageData<Service>;
   filter: ServiceFilter;
