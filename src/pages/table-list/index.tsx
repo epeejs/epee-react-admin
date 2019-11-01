@@ -82,11 +82,11 @@ export default function TableList(props: TableListProps) {
   const { setFilter, resetFilter, fetchServiceList } = useStoreActions(
     actions => actions.tableListModel,
   );
-  const [state, fetch] = useAsyncFn(() => fetchServiceList(), [filter]);
+  const [state, fetch] = useAsyncFn(() => fetchServiceList());
 
   useEffect(() => {
     fetch();
-  }, [fetch]);
+  }, [fetch, filter]);
 
   return (
     <div className={styles.wrap}>

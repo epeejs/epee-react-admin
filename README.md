@@ -1,10 +1,10 @@
 ## 💡 预览
 
 水平布局 (master)：https://epee.netlify.com/
-![hlayout](https://github.com/dobble11/aseets/blob/master/hlayout.png)
+![hlayout](https://raw.githubusercontent.com/dobble11/aseets/master/hlayout.png)
 
 垂直布局 ([dev-vertical-layout](https://github.com/dobble11/epee-react-admin-ts/tree/dev-vertical-layout))：https://vepee.netlify.com/
-![vlayout](https://github.com/dobble11/aseets/blob/master/vlayout.png)
+![vlayout](https://raw.githubusercontent.com/dobble11/aseets/master/vlayout.png)
 
 ## 🚀 特性
 
@@ -79,7 +79,7 @@ src
 +   NewPage.module.scss
 ```
 
-**NewPage.tsx** 部分代码
+**NewPage.tsx** 部分代码如下：
 
 ```tsx
 export default function NewPage(props: NewPageProps) {
@@ -115,7 +115,7 @@ export const router: RouterNode[] = [
 
 修改好之后运行，可以看到如下效果
 
-![preview](https://github.com/dobble11/aseets/blob/master/newpage.png)
+![preview](https://raw.githubusercontent.com/dobble11/aseets/master/newpage.png)
 
 ### 引入数据流
 
@@ -133,7 +133,7 @@ export const Api = {
 
 按照约定，路径名以大写及请求类型开头命名
 
-2. 依据接口文档，编写请求服务，新建 **services/table-list.service.ts** 文件（快捷键：tsreq），修改内容：
+2. 依据接口文档，编写请求服务，新建 **services/table-list.service.ts** 文件（快捷键：tsreq），部分代码如下：
 
 ```ts
 import { Api } from 'src/constants/Api';
@@ -150,7 +150,7 @@ export const getServiceList = (
   });
 ```
 
-3. 新建 **models/table-list.mode.ts** 文件（快捷键：tsmode），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查
+3. 新建 **models/table-list.mode.ts** 文件（快捷键：tsmode），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查，部分代码如下：
 
 ```ts
 import { Action, action, Thunk, thunk } from 'easy-peasy';
@@ -165,25 +165,27 @@ export interface TableListModel {
   fetchServiceList: Thunk<TableListModel>;
 }
 
-const initFilter: ServiceFilter = {
-  name: '',
-  updateDate: '',
-  page: 1,
-  pageSize: 10,
-};
-
-export const tableListModel: TableListModel = {
+const initState: Pick<TableListModel, 'data' | 'filter'> = {
   data: {
     list: [],
     total: 0,
   },
-  filter: initFilter,
+  filter: {
+    name: '',
+    updateDate: '',
+    page: 1,
+    pageSize: 10,
+  },
+};
+
+export const tableListModel: TableListModel = {
+  ...initState,
   // 快捷键：act
   setFilter: action((state, payload) => {
     state.filter = { ...state.filter, ...payload };
   }),
   resetFilter: action(state => {
-    state.filter = initFilter;
+    state.filter = initState.filter;
   }),
   setData: action((state, payload) => {
     state.data = payload;
@@ -223,11 +225,11 @@ export default function TableList(props: TableListProps) {
   const { setFilter, resetFilter, fetchServiceList } = useStoreActions(
     actions => actions.tableListModel,
   );
-  const [state, fetch] = useAsyncFn(() => fetchServiceList(), [filter]);
+  const [state, fetch] = useAsyncFn(() => fetchServiceList());
 
   useEffect(() => {
     fetch();
-  }, [fetch]);
+  }, [fetch, filter]);
 
   return (
     <div className={styles.wrap}>

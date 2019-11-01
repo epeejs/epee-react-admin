@@ -31,24 +31,26 @@ export interface TableListModel {
   fetchServiceList: Thunk<TableListModel>;
 }
 
-const initFilter: ServiceFilter = {
-  name: '',
-  updateDate: '',
-  page: 1,
-  pageSize: 10,
-};
-
-export const tableListModel: TableListModel = {
+const initState: Pick<TableListModel, 'data' | 'filter'> = {
   data: {
     list: [],
     total: 0,
   },
-  filter: initFilter,
+  filter: {
+    name: '',
+    updateDate: '',
+    page: 1,
+    pageSize: 10,
+  },
+};
+
+export const tableListModel: TableListModel = {
+  ...initState,
   setFilter: action((state, payload) => {
     state.filter = { ...state.filter, ...payload };
   }),
   resetFilter: action(state => {
-    state.filter = initFilter;
+    state.filter = initState.filter;
   }),
   setData: action((state, payload) => {
     state.data = payload;
