@@ -79,20 +79,14 @@ export default function TableList(props: TableListProps) {
   ];
   const { total, list } = useStoreState(state => state.tableListModel.data);
   const filter = useStoreState(state => state.tableListModel.filter);
-  const setFilter = useStoreActions(
-    actions => actions.tableListModel.setFilter,
+  const { setFilter, resetFilter, fetchServiceList } = useStoreActions(
+    actions => actions.tableListModel,
   );
-  const resetFilter = useStoreActions(
-    actions => actions.tableListModel.resetFilter,
-  );
-  const fetchServiceList = useStoreActions(
-    actions => actions.tableListModel.fetchServiceList,
-  );
-  const [state, fetch] = useAsyncFn(() => fetchServiceList());
+  const [state, fetch] = useAsyncFn(() => fetchServiceList(), [filter]);
 
   useEffect(() => {
     fetch();
-  }, [fetch, filter]);
+  }, [fetch]);
 
   return (
     <div className={styles.wrap}>

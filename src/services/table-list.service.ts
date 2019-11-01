@@ -1,27 +1,6 @@
 import { Api } from 'src/constants/Api';
+import { Service, ServiceFilter } from 'src/models/table-list.model';
 import request from 'src/utils/request';
-
-export interface Service {
-  avatar: string;
-  callNo: number;
-  createdAt: string;
-  desc: string;
-  disabled: boolean;
-  href: string;
-  key: number;
-  name: string;
-  owner: string;
-  progress: number;
-  status: number;
-  title: string;
-  updatedAt: string;
-}
-export interface ServiceFilter {
-  name: string;
-  updateDate: string;
-  page: number;
-  pageSize: number;
-}
 
 export const getServiceList = (
   filter: Omit<ServiceFilter, keyof PageParams>,
