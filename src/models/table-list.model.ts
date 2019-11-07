@@ -25,7 +25,7 @@ export interface ServiceFilter {
 export interface TableListModel {
   data: PageData<Service>;
   filter: ServiceFilter;
-  setFilter: Action<TableListModel, Partial<ServiceFilter>>;
+  modifyFilter: Action<TableListModel, Partial<ServiceFilter>>;
   resetFilter: Action<TableListModel>;
   setData: Action<TableListModel, PageData<Service>>;
   fetchServiceList: Thunk<TableListModel>;
@@ -46,7 +46,7 @@ const initState: Pick<TableListModel, 'data' | 'filter'> = {
 
 export const tableListModel: TableListModel = {
   ...initState,
-  setFilter: action((state, payload) => {
+  modifyFilter: action((state, payload) => {
     state.filter = { ...state.filter, ...payload };
   }),
   resetFilter: action(state => {
