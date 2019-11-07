@@ -1,4 +1,4 @@
-import { ConfigProvider } from 'antd';
+import { ConfigProvider, message } from 'antd';
 import 'antd/dist/antd.css';
 import zhCN from 'antd/lib/locale/zh_CN';
 import { StoreProvider } from 'easy-peasy';
@@ -12,8 +12,27 @@ import { store } from './constants/store';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import './style/global.css';
+import request from './utils/request';
 
 moment.locale('zh-cn');
+request.interceptors.response = async function(response) {
+  const res = (await response.json()) as ResponseBody<any>;
+
+  if (!res.code) {
+    return res;
+  } else {
+    // eslint-disable-next-line
+    throw { statusText: res.data, res };
+  }
+};
+request.interceptors.catch = function(error) {
+  if (error.status === 401) {
+    window.location.href = '/login?code=401';
+    return;
+  }
+
+  message.error(error.statusText || '无法连接服务器');
+};
 
 ReactDOM.render(
   <ConfigProvider locale={zhCN}>

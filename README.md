@@ -150,7 +150,7 @@ export const getServiceList = (
   });
 ```
 
-3. 新建 **models/table-list.mode.ts** 文件（快捷键：tsmode），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查，部分代码如下：
+3. 新建 **models/table-list.model.ts** 文件（快捷键：tsmodel），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查，部分代码如下：
 
 ```ts
 import { Action, action, Thunk, thunk } from 'easy-peasy';
@@ -159,7 +159,7 @@ import { getServiceList } from 'src/services/table-list.service';
 export interface TableListModel {
   data: PageData<Service>;
   filter: ServiceFilter;
-  setFilter: Action<TableListModel, Partial<ServiceFilter>>;
+  modifyFilter: Action<TableListModel, Partial<ServiceFilter>>;
   resetFilter: Action<TableListModel>;
   setData: Action<TableListModel, PageData<Service>>;
   fetchServiceList: Thunk<TableListModel>;
@@ -181,7 +181,7 @@ const initState: Pick<TableListModel, 'data' | 'filter'> = {
 export const tableListModel: TableListModel = {
   ...initState,
   // 快捷键：act
-  setFilter: action((state, payload) => {
+  modifyFilter: action((state, payload) => {
     state.filter = { ...state.filter, ...payload };
   }),
   resetFilter: action(state => {
@@ -220,8 +220,12 @@ export const storeModel: StoreModel = {
 import { useStoreActions, useStoreState } from 'src/hooks';
 
 export default function TableList(props: TableListProps) {
-  const { total, list } = useStoreState(state => state.tableListModel.data);
-  const filter = useStoreState(state => state.tableListModel.filter);
+  // 快捷键：cus
+  const {
+    data: { total, list },
+    filter,
+  } = useStoreState(state => state.tableListModel);
+  // 快捷键：cua
   const { setFilter, resetFilter, fetchServiceList } = useStoreActions(
     actions => actions.tableListModel,
   );
@@ -234,9 +238,11 @@ export default function TableList(props: TableListProps) {
   return (
     <div className={styles.wrap}>
       <div className={styles.header}>
+        <Button type="primary">查询</Button>
         <Button onClick={() => resetFilter()}>重置</Button>
       </div>
       <Table
+        columns={columns}
         dataSource={list}
         loading={state.loading}
         pagination={{
@@ -245,10 +251,10 @@ export default function TableList(props: TableListProps) {
           current: filter.page,
           showSizeChanger: true,
           onChange(curr) {
-            setFilter({ page: curr });
+            modifyFilter({ page: curr });
           },
           onShowSizeChange(curr, size) {
-            setFilter({ page: 1, pageSize: size });
+            modifyFilter({ page: 1, pageSize: size });
           },
         }}
       />

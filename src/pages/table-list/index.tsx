@@ -77,9 +77,11 @@ export default function TableList(props: TableListProps) {
       },
     },
   ];
-  const { total, list } = useStoreState(state => state.tableListModel.data);
-  const filter = useStoreState(state => state.tableListModel.filter);
-  const { setFilter, resetFilter, fetchServiceList } = useStoreActions(
+  const {
+    data: { total, list },
+    filter,
+  } = useStoreState(state => state.tableListModel);
+  const { modifyFilter, resetFilter, fetchServiceList } = useStoreActions(
     actions => actions.tableListModel,
   );
   const [state, fetch] = useAsyncFn(() => fetchServiceList());
@@ -104,10 +106,10 @@ export default function TableList(props: TableListProps) {
           current: filter.page,
           showSizeChanger: true,
           onChange(curr) {
-            setFilter({ page: curr });
+            modifyFilter({ page: curr });
           },
           onShowSizeChange(curr, size) {
-            setFilter({ page: 1, pageSize: size });
+            modifyFilter({ page: 1, pageSize: size });
           },
         }}
       />

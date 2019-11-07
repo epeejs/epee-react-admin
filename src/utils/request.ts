@@ -48,9 +48,9 @@ async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
 
     if (response.ok) {
       if (request.interceptors.response) {
-        return request.interceptors.response(response);
+        return await request.interceptors.response(response);
       }
-      return response.json();
+      return await response.json();
     }
     throw response;
   } catch (error) {
