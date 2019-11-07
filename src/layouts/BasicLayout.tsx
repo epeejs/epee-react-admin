@@ -95,9 +95,7 @@ export default function BasicLayout({
                   <Route
                     key={path}
                     path={path}
-                    component={(props: RouteComponentProps) => (
-                      <Component routes={routes} {...props} />
-                    )}
+                    render={props => <Component routes={routes} {...props} />}
                     {...routeProps}
                   />
                 );
