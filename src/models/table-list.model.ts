@@ -1,5 +1,6 @@
-import { Action, action, Thunk, thunk } from 'easy-peasy';
+import { Action, action, ActionTypes, Thunk, thunk } from 'easy-peasy';
 import { getServiceList } from 'src/services/table-list.service';
+import { O } from 'ts-toolbelt';
 
 export interface Service {
   avatar: string;
@@ -31,7 +32,7 @@ export interface TableListModel {
   fetchServiceList: Thunk<TableListModel>;
 }
 
-const initState: Pick<TableListModel, 'data' | 'filter'> = {
+const initState: O.Filter<TableListModel, ActionTypes> = {
   data: {
     list: [],
     total: 0,
