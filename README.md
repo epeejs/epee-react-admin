@@ -165,7 +165,7 @@ export interface TableListModel {
   fetchServiceList: Thunk<TableListModel>;
 }
 
-const initState: Pick<TableListModel, 'data' | 'filter'> = {
+const initState: O.Filter<TableListModel, ActionTypes> = {
   data: {
     list: [],
     total: 0,

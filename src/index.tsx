@@ -16,13 +16,13 @@ import request from './utils/request';
 
 moment.locale('zh-cn');
 request.interceptors.response = async function(response) {
-  const res = (await response.json()) as ResponseBody<any>;
+  const res: ResponseBody<any> = await response.json();
 
   if (!res.code) {
     return res;
   } else {
     // eslint-disable-next-line
-    throw { statusText: res.data, res };
+    throw { statusText: res.data, url: response.url, res };
   }
 };
 request.interceptors.catch = function(error) {
