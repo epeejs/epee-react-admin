@@ -65,8 +65,13 @@ function renderRoute(router: RouterNode[]): any[] {
       <Route
         key={path}
         path={path}
-        // eslint-disable-next-line react/display-name
-        component={redirect ? () => <Redirect to={redirect} /> : component}
+        render={props =>
+          redirect ? (
+            <Redirect to={redirect} />
+          ) : (
+            component && React.createElement(component, props)
+          )
+        }
       />
     );
   });
@@ -92,7 +97,7 @@ export default function BasicLayout({
     <Layout>
       <Sider width={256} collapsed={collapsed}>
         <div className={styles.logo}>
-          <Link to="/"> {window.config.systemName}</Link>
+          <Link to="/">{window.config.systemName}</Link>
         </div>
         {pathname !== '/' && (
           <Menu

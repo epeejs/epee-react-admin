@@ -31,7 +31,7 @@ request.interceptors.catch = function(error) {
     return;
   }
 
-  message.error(error.statusText || '无法连接服务器');
+  message.error(error.statusText ?? '无法连接服务器');
 };
 
 ReactDOM.render(
