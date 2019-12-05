@@ -153,7 +153,7 @@ export const getServiceList = (
 3. 新建 **models/table-list.model.ts** 文件（快捷键：tsmodel），编写对应 state、action 处理数据变化，并定义对应类型用于类型检查，部分代码如下：
 
 ```ts
-import { Action, action, Thunk, thunk } from 'easy-peasy';
+import { Action, action, ActionTypes, Thunk, thunk } from 'easy-peasy';
 import { getServiceList } from 'src/services/table-list.service';
 
 export interface TableListModel {
