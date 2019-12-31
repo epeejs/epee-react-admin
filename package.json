@@ -46,7 +46,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docker:build": "docker build . -t epee-react-admin",
-    "docker:up": "docker-compose -f ./docker/docker-compose.yml up"
+    "docker:up": "docker-compose -f ./docker/docker-compose.yml up -d"
   },
   "husky": {
     "hooks": {

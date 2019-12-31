@@ -94,7 +94,7 @@ export default function NewPage(props: NewPageProps) {
 修改 **constants/router.ts** 内容
 
 ```diff
-export const router: RouterNode[] = [
+export const router: RouteNode[] = [
   {
     path: '/dashboard',
     name: 'Dashboard',
