@@ -11,7 +11,10 @@ export interface ReqInit extends RequestInit {
   timeout?: number;
 }
 
-async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
+async function request<T = unknown>(
+  path: string,
+  init: ReqInit = {},
+): Promise<T> {
   const mergeInit = {
     ...request.default,
     ...init,
