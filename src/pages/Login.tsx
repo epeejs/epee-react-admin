@@ -70,4 +70,4 @@ function Login({ form, history }: LoginProps) {
   );
 }
 
-export default Form.create()(Login);
+export default Form.create<LoginProps>()(Login);
