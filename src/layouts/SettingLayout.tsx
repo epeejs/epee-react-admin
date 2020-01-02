@@ -1,16 +1,11 @@
 import { Tabs } from 'antd';
 import React from 'react';
-import { RouteComponentProps } from 'react-router';
-import { RouteType } from './BasicLayout';
+import { RouterLayoutType } from './RouterLayout';
 import styles from './SettingLayout.module.scss';
 
 const { TabPane } = Tabs;
 
-interface SettingLayoutProps extends RouteComponentProps<{ item: string }> {
-  routes: RouteType[];
-}
-
-export default function SettingLayout(props: SettingLayoutProps) {
+export default function SettingLayout(props: RouterLayoutType) {
   return (
     <div className={styles.wrap}>
       <Tabs
@@ -18,9 +13,9 @@ export default function SettingLayout(props: SettingLayoutProps) {
         activeKey={props.location.pathname}
         onChange={key => props.history.push(key)}
       >
-        {props.routes.map(({ path, name, component: Component }) => (
+        {props.router.map(({ path, name, component }) => (
           <TabPane key={path} tab={name}>
-            {Component && <Component />}
+            {component && React.createElement(component)}
           </TabPane>
         ))}
       </Tabs>

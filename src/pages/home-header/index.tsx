@@ -1,13 +1,11 @@
 import { Avatar, Dropdown, Menu } from 'antd';
 import React from 'react';
-import { Link, RouteComponentProps } from 'react-router-dom';
-import { router } from 'src/constants/router';
-import BasicLayout from 'src/layouts/BasicLayout';
-import styles from './Home.module.scss';
+import { Link } from 'react-router-dom';
+import styles from './index.module.scss';
 
-export default function Home(props: RouteComponentProps) {
+export default function HomeHeader() {
   return (
-    <BasicLayout router={router} {...props}>
+    <>
       <Dropdown
         className={styles.pop}
         overlay={
@@ -26,6 +24,6 @@ export default function Home(props: RouteComponentProps) {
           <span className={styles.user_name}>Scott Anderson</span>
         </div>
       </Dropdown>
-    </BasicLayout>
+    </>
   );
 }

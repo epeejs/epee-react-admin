@@ -6,9 +6,10 @@ import moment from 'moment';
 import 'moment/locale/zh-cn';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { router } from './constants/router';
 import { store } from './constants/store';
-import Home from './pages/Home';
+import RouterLayout from './layouts/RouterLayout';
 import './style/global.css';
 
 moment.locale('zh-cn');
@@ -17,9 +18,7 @@ ReactDOM.render(
   <ConfigProvider locale={zhCN}>
     <StoreProvider store={store}>
       <Router>
-        <Switch>
-          <Route path="/" component={Home} />
-        </Switch>
+        <RouterLayout router={router} />
       </Router>
     </StoreProvider>
   </ConfigProvider>,
