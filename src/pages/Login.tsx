@@ -9,13 +9,15 @@ interface LoginProps extends RouteComponentProps, FormComponentProps {
   [key: string]: any;
 }
 
-function Login({ form, history, location: { search } }: LoginProps) {
+function Login({ form, history }: LoginProps) {
   const { getFieldDecorator } = form;
 
   useMount(() => {
-    if (search) {
+    const code = sessionStorage.getItem('code');
+
+    if (code === '401') {
       message.error('身份信息已过期或权限不足，请重新登录！');
-      history.replace('/login');
+      sessionStorage.clear();
     }
   });
 

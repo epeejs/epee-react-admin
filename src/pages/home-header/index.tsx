@@ -40,7 +40,7 @@ export default function HomeHeader(props: HomeHeaderProps) {
           </Menu>
         }
       >
-        <div>
+        <div className={styles.pop_trigger}>
           <Avatar icon="user" />
           <span className={styles.user_name}>{userInfo.name}</span>
         </div>

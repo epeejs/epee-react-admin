@@ -26,7 +26,8 @@ request.interceptors.response = async function(response) {
 };
 request.interceptors.catch = function(error) {
   if (error.status === 401) {
-    window.location.href = '/login?code=401';
+    sessionStorage.setItem('code', '401');
+    window.location.href = '/login';
     return;
   }
 
