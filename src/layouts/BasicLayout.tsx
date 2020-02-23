@@ -1,10 +1,11 @@
 import { Icon, Layout, Menu } from 'antd';
 import _ from 'lodash';
 import React from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Switch } from 'react-router-dom';
 import { useStoreState } from 'src/hooks';
 import styles from './BasicLayout.module.scss';
 import { RouteNode, RouterLayoutType } from './RouterLayout';
+import PrivateRoute from './utils/PrivateRoute';
 
 const { Header, Sider, Content } = Layout;
 const { SubMenu, Item: MenuItem } = Menu;
@@ -45,12 +46,13 @@ function renderRoute(router: RouteNode[]): any[] {
       return renderRoute(m.routes!);
     }
 
-    const { redirect, path, component } = m;
+    const { redirect, path, component, authority } = m;
 
     return (
-      <Route
+      <PrivateRoute
         key={path}
         path={path}
+        authority={authority}
         render={props =>
           redirect ? (
             <Redirect to={redirect} />

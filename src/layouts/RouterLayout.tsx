@@ -1,12 +1,17 @@
 import _ from 'lodash';
 import React from 'react';
-import { Redirect, Route, RouteComponentProps, Switch } from 'react-router-dom';
-import { useStoreState } from 'src/hooks';
+import { Redirect, RouteComponentProps, Switch } from 'react-router-dom';
+import PrivateRoute from './utils/PrivateRoute';
 
 export enum Roles {
-  Admin,
-  User,
-  Guest,
+  /** 游客 */
+  Guest = 'Guest',
+  /** 超级管理员 */
+  SuperAdmin = 'SuperAdmin',
+  /** 普通管理员 */
+  Admin = 'Admin',
+  /** 操作账号 */
+  User = 'User',
 }
 export interface RouteNode {
   path: string;
@@ -25,61 +30,46 @@ export interface RouteNode {
   /** 预留自定义属性 */
   [otherProp: string]: any;
 }
+export type RouterLayoutType = RouterLayoutProps & RouteComponentProps;
 
 interface RouterLayoutProps {
   router: RouteNode[];
 }
 
-export type RouterLayoutType = RouterLayoutProps & RouteComponentProps;
-
 export default function RouterLayout({ router }: RouterLayoutProps) {
-  const { role } = useStoreState(state => state.globalModel.userInfo);
-
   return (
     <Switch>
       {router.map(
-        ({
-          path,
-          routes,
-          layout,
-          component,
-          redirect,
-          authority,
-          ...otherProps
-        }) => {
+        ({ path, routes, layout, component, redirect, ...otherProps }) => {
           if (layout && !_.isEmpty(routes) && component) {
             return (
-              <Route
+              <PrivateRoute
                 key={path}
                 path={path}
                 render={props => {
-                  if (authority && !authority.includes(role)) {
-                    return <Redirect to="/login" />;
-                  }
-
                   return React.createElement(component, {
                     router: routes,
                     ...otherProps,
                     ...props,
                   });
                 }}
+                {...otherProps}
               />
             );
           }
 
           return (
-            <Route
+            <PrivateRoute
               key={path}
               path={path}
               render={props =>
                 redirect ? (
                   <Redirect to={redirect} />
-                ) : authority && !authority.includes(role) ? (
-                  <Redirect to="/login" />
                 ) : (
                   component && React.createElement(component, props)
                 )
               }
+              {...otherProps}
             />
           );
         },

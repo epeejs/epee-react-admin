@@ -1,7 +1,8 @@
-import { Button, Checkbox, Form, Icon, Input } from 'antd';
+import { Button, Checkbox, Form, Icon, Input, message } from 'antd';
 import { FormComponentProps } from 'antd/lib/form';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { useMount } from 'react-use';
 import styles from './Login.module.scss';
 
 interface LoginProps extends RouteComponentProps, FormComponentProps {
@@ -10,6 +11,15 @@ interface LoginProps extends RouteComponentProps, FormComponentProps {
 
 function Login({ form, history }: LoginProps) {
   const { getFieldDecorator } = form;
+
+  useMount(() => {
+    const code = sessionStorage.getItem('code');
+
+    if (code === '401') {
+      message.error('身份信息已过期或权限不足，请重新登录！');
+      sessionStorage.clear();
+    }
+  });
 
   return (
     <div className={styles.wrap}>
@@ -70,4 +80,4 @@ function Login({ form, history }: LoginProps) {
   );
 }
 
-export default Form.create()(Login);
+export default Form.create<LoginProps>()(Login);
