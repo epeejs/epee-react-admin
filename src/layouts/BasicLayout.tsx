@@ -1,9 +1,10 @@
 import { Divider, Layout, Menu } from 'antd';
 import _ from 'lodash';
 import React from 'react';
-import { Link, Redirect, Route, Switch } from 'react-router-dom';
+import { Link, Redirect, Switch } from 'react-router-dom';
 import styles from './BasicLayout.module.scss';
 import { RouterLayoutType } from './RouterLayout';
+import PrivateRoute from './utils/PrivateRoute';
 
 const { Header, Content } = Layout;
 const { Item: MenuItem } = Menu;
@@ -71,7 +72,7 @@ export default function BasicLayout({
             // handle layout
             if (layout && component && !_.isEmpty(routes)) {
               return (
-                <Route
+                <PrivateRoute
                   key={path}
                   path={path}
                   render={props =>
@@ -82,11 +83,11 @@ export default function BasicLayout({
               );
             }
             if (routes && !_.isEmpty(routes)) {
-              return routes.map(n => <Route key={n.path} {...n} />);
+              return routes.map(n => <PrivateRoute key={n.path} {...n} />);
             }
 
             return (
-              <Route
+              <PrivateRoute
                 key={path}
                 path={path}
                 render={props =>

@@ -1,9 +1,17 @@
 @import '~src/constants/const';
 
 .user_name {
+  display: inline-block;
+  width: 80px;
   margin-left: 12px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: keep-all;
 }
 
 .pop {
+  display: flex;
+  align-items: center;
   margin-left: 50px;
 }
