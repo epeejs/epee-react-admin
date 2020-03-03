@@ -2,5 +2,8 @@
 
 .wrap {
   display: flex;
-  margin: $page-margin;
+  flex-direction: column;
+  height: 100%;
+  padding: $page-margin $page-margin 0;
+  overflow: auto;
 }
