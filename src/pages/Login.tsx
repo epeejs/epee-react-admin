@@ -53,7 +53,7 @@ function Login({ history }: LoginProps) {
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
-          <a href="">Forgot password</a>
+          <a href="/login">Forgot password</a>
         </Form.Item>
 
         <Form.Item>
@@ -65,7 +65,7 @@ function Login({ history }: LoginProps) {
           >
             Log in
           </Button>
-          Or <a href="">register now!</a>
+          Or <a href="/login">register now!</a>
         </Form.Item>
       </Form>
     </div>
