@@ -1,4 +1,10 @@
-import { Avatar, Dropdown, Icon, Menu } from 'antd';
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PoweroffOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import { Avatar, Dropdown, Menu } from 'antd';
 import React from 'react';
 import { useStoreActions, useStoreState } from 'src/hooks';
 import styles from './index.module.scss';
@@ -15,11 +21,12 @@ export default function HomeHeader(props: HomeHeaderProps) {
 
   return (
     <div className={styles.wrap}>
-      <Icon
+      <span
         className={styles.btn_toggle}
-        type={collapseMenu ? 'menu-unfold' : 'menu-fold'}
         onClick={() => setCollapseMenu(!collapseMenu)}
-      />
+      >
+        {collapseMenu ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </span>
 
       <Dropdown
         className={styles.pop}
@@ -33,7 +40,7 @@ export default function HomeHeader(props: HomeHeaderProps) {
                   window.location.href = '/login';
                 }}
               >
-                <Icon type="poweroff" style={{ marginRight: 15 }} />
+                <PoweroffOutlined style={{ marginRight: 15 }} />
                 <span>退出登录</span>
               </span>
             </Menu.Item>
@@ -41,7 +48,7 @@ export default function HomeHeader(props: HomeHeaderProps) {
         }
       >
         <div className={styles.pop_trigger}>
-          <Avatar icon="user" />
+          <Avatar icon={<UserOutlined />} />
           <span className={styles.user_name}>{userInfo.name}</span>
         </div>
       </Dropdown>

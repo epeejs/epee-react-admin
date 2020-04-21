@@ -1,4 +1,4 @@
-import { Icon, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import _ from 'lodash';
 import React from 'react';
 import { Link, Redirect, Switch } from 'react-router-dom';
@@ -21,7 +21,7 @@ function renderMenu(router: RouteNode[]) {
           key={m.path}
           title={
             <span>
-              {m.icon && <Icon type={m.icon} />}
+              {m.icon && React.createElement(m.icon)}
               <span>{m.name}</span>
             </span>
           }
@@ -33,7 +33,7 @@ function renderMenu(router: RouteNode[]) {
 
     return (
       <MenuItem key={m.path}>
-        {m.icon && <Icon type={m.icon} />}
+        {m.icon && React.createElement(m.icon)}
         <span>{m.name}</span>
       </MenuItem>
     );
