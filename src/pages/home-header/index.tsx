@@ -1,3 +1,4 @@
+import { UserOutlined } from '@ant-design/icons';
 import { Avatar, Dropdown, Menu } from 'antd';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -20,7 +21,7 @@ export default function HomeHeader() {
         }
       >
         <div>
-          <Avatar icon="user" />
+          <Avatar icon={<UserOutlined />} />
           <span className={styles.user_name}>Scott Anderson</span>
         </div>
       </Dropdown>

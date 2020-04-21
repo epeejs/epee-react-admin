@@ -60,6 +60,30 @@
       "}"
     ]
   },
+  "easy-peasy action": {
+    "scope": "typescript,javascript",
+    "prefix": "act",
+    "body": ["action((state, payload) => {", "  ${0}", "}),"]
+  },
+  "easy-peasy thunk": {
+    "scope": "typescript,javascript",
+    "prefix": "thunk",
+    "body": [
+      "thunk(async (actions, payload, { getState }) => {",
+      "  ${0}",
+      "}),"
+    ]
+  },
+  "const {} = useStoreState": {
+    "scope": "typescriptreact",
+    "prefix": "cus",
+    "body": ["const { $0 } = useStoreState(state => state.$1);"]
+  },
+  "const {} = useStoreActions": {
+    "scope": "typescriptreact",
+    "prefix": "cua",
+    "body": ["const { $0 } = useStoreActions(actions => actions.$1);"]
+  },
   "const {} = object": {
     "scope": "typescriptreact,typescript,javascript",
     "prefix": "co",

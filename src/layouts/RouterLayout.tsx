@@ -16,6 +16,7 @@ export enum Roles {
 export interface RouteNode {
   path: string;
   name?: string;
+  icon?: React.ElementType;
   /** 重定向不能与布局组件同时使用，同时使用时会忽略重定向（可以通过布局组件内部处理解决） */
   redirect?: string;
   /** 菜单布局组件会使用 */

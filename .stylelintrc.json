@@ -5,5 +5,8 @@
     "stylelint-config-rational-order",
     "stylelint-config-prettier"
   ],
-  "plugins": ["stylelint-order"]
+  "plugins": ["stylelint-order"],
+  "rules": {
+    "no-descending-specificity": null
+  }
 }
