@@ -24,7 +24,7 @@ export interface RouteNode {
   /** 是否是布局组件（默认 `false`）  */
   layout?: boolean;
   /** 当 `layout` 为 `true` 时，该组件会作为布局组件，接收 `router` (routes 别名) 及其它属性值，*/
-  component?: React.ElementType;
+  component?: React.ComponentType<any>;
   routes?: RouteNode[];
   /** 授权 */
   authority?: Roles[];
