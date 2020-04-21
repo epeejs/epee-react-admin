@@ -30,7 +30,7 @@ export default function NewPage(props: NewPageProps) {
 
   return (
     <div className={styles.wrap} ref={ref}>
-      <p>距上次更新时间：{loadDate.fromNow(true)}前</p>
+      <p>距上次更新时间：{loadDate.fromNow()}</p>
       <ul>
         {_.range(200).map(v => (
           <li key={v}>{v}</li>

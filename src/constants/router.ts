@@ -1,3 +1,9 @@
+import {
+  DashboardOutlined,
+  FileOutlined,
+  FormOutlined,
+  TableOutlined,
+} from '@ant-design/icons';
 import BasicLayout from 'src/layouts/BasicLayout';
 import { Roles, RouteNode } from 'src/layouts/RouterLayout';
 import Analysis from 'src/pages/analysis';
@@ -20,7 +26,7 @@ export const router: RouteNode[] = [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        icon: 'dashboard',
+        icon: DashboardOutlined,
         routes: [
           { path: '/dashboard/analysis', name: '分析页', component: Analysis },
         ],
@@ -28,13 +34,13 @@ export const router: RouteNode[] = [
       {
         path: '/form',
         name: '表单页',
-        icon: 'form',
+        icon: FormOutlined,
         routes: [{ path: '/form/basic-form', name: '基础表单' }],
       },
       {
         path: '/list',
         name: '列表页',
-        icon: 'table',
+        icon: TableOutlined,
         routes: [
           {
             path: '/list/table-list',
@@ -60,7 +66,7 @@ export const router: RouteNode[] = [
       {
         path: '/new',
         name: '新页面',
-        icon: 'file',
+        icon: FileOutlined,
         component: NewPage,
       },
       {
