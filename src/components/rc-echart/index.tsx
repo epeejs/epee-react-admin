@@ -13,6 +13,7 @@ export type EChartOption = echarts.EChartOption;
 interface EChartProps {
   option: EChartOption;
   timestamp?: number;
+  className?: string;
   style?: React.CSSProperties;
   onClick?: (param: any) => void;
 }
@@ -21,6 +22,7 @@ export default function EChart({
   option,
   onClick,
   timestamp,
+  className,
   style = { width: '100%', height: '100%' },
 }: EChartProps) {
   const cntrRef = useRef<HTMLDivElement | null>(null);
@@ -33,12 +35,10 @@ export default function EChart({
   }
 
   useMount(() => {
-    setTimeout(() => {
-      const chart = echarts.init(cntrRef.current!);
-      chart.on('click', (params: any) => onClick && onClick(params));
-      chart.setOption(option);
-      chartRef.current = chart;
-    }, 100);
+    const chart = echarts.init(cntrRef.current!);
+    chart.on('click', (params: any) => onClick && onClick(params));
+    chart.setOption(option);
+    chartRef.current = chart;
   });
 
   useUnmount(() => {
@@ -65,5 +65,5 @@ export default function EChart({
     resize();
   }, [timestamp]);
 
-  return <div style={style} ref={cntrRef} />;
+  return <div className={className} style={style} ref={cntrRef} />;
 }
