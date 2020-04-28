@@ -1,9 +1,9 @@
 ## 💡 预览
 
-水平布局 (master)：https://epee.netlify.com/
+水平布局 (master)：https://epee.netlify.app/
 ![hlayout](https://raw.githubusercontent.com/dobble11/aseets/master/hlayout.png)
 
-垂直布局 ([dev-vertical-layout](https://github.com/dobble11/epee-react-admin-ts/tree/dev-vertical-layout))：https://vepee.netlify.com/
+垂直布局 ([dev-vertical-layout](https://github.com/dobble11/epee-react-admin-ts/tree/dev-vertical-layout))：https://vepee.netlify.app/
 ![vlayout](https://raw.githubusercontent.com/dobble11/aseets/master/vlayout.png)
 
 ## 🚀 特性
@@ -98,7 +98,7 @@ export const router: RouteNode[] = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    icon: 'dashboard',
+    icon: DashboardOutlined,
     routes: [
       { path: '/dashboard/analysis', name: '分析页', component: Analysis },
     ],
@@ -107,7 +107,7 @@ export const router: RouteNode[] = [
 +  {
 +    path: '/new',
 +    name: '新页面',
-+    icon: 'file',
++    icon: FileOutlined,
 +    component: NewPage,
 +  },
 ]

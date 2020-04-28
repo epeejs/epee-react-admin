@@ -17,15 +17,5 @@
     "jsx": "react",
     "noUnusedLocals": true
   },
-  "include": ["src", "@types"],
-  "exclude": [
-    "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts",
-    "config"
-  ]
+  "include": ["src", "@types"]
 }
