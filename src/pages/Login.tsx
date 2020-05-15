@@ -9,7 +9,7 @@ interface LoginProps extends RouteComponentProps {
   [key: string]: any;
 }
 
-function Login({ history }: LoginProps) {
+const Login: React.FC<LoginProps> = ({ history }) => {
   useMount(() => {
     const code = sessionStorage.getItem('code');
 
@@ -70,6 +70,6 @@ function Login({ history }: LoginProps) {
       </Form>
     </div>
   );
-}
+};
 
 export default Login;

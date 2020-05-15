@@ -69,12 +69,12 @@ interface BasicLayoutProps extends RouterLayoutType {
   child: React.ComponentType<any>;
 }
 
-export default function BasicLayout({
+const BasicLayout: React.FC<BasicLayoutProps> = ({
   router,
   history,
   location: { pathname },
   child,
-}: BasicLayoutProps) {
+}) => {
   const paths = _.dropRight(pathname.split('/'), 1);
   const openKeys = paths.map((m, i) => _.take(paths, i + 1).join('/'));
   const collapseMenu = useStoreState(state => state.globalModel.collapseMenu);
@@ -105,4 +105,6 @@ export default function BasicLayout({
       </Layout>
     </Layout>
   );
-}
+};
+
+export default BasicLayout;

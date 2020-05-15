@@ -37,39 +37,32 @@ interface RouterLayoutProps {
   router: RouteNode[];
 }
 
-export default function RouterLayout({ router }: RouterLayoutProps) {
+const RouterLayout: React.FC<RouterLayoutProps> = ({
+  router,
+}: RouterLayoutProps) => {
   return (
     <Switch>
       {router.map(
         ({ path, routes, layout, component, redirect, ...otherProps }) => {
-          if (layout && !_.isEmpty(routes) && component) {
-            return (
-              <PrivateRoute
-                key={path}
-                path={path}
-                render={props => {
+          return (
+            <PrivateRoute
+              key={path}
+              path={path}
+              render={props => {
+                if (layout && !_.isEmpty(routes) && component) {
                   return React.createElement(component, {
                     router: routes,
                     ...otherProps,
                     ...props,
                   });
-                }}
-                {...otherProps}
-              />
-            );
-          }
+                }
 
-          return (
-            <PrivateRoute
-              key={path}
-              path={path}
-              render={props =>
-                redirect ? (
+                return redirect ? (
                   <Redirect to={redirect} />
                 ) : (
                   component && React.createElement(component, props)
-                )
-              }
+                );
+              }}
               {...otherProps}
             />
           );
@@ -77,4 +70,6 @@ export default function RouterLayout({ router }: RouterLayoutProps) {
       )}
     </Switch>
   );
-}
+};
+
+export default RouterLayout;

@@ -14,7 +14,7 @@ interface TableListProps extends RouteComponentProps {
   [key: string]: any;
 }
 
-export default function TableList(props: TableListProps) {
+const TableList: React.FC<TableListProps> = props => {
   const columns: ColumnProps<any>[] = [
     {
       title: '规则名称',
@@ -115,4 +115,6 @@ export default function TableList(props: TableListProps) {
       />
     </div>
   );
-}
+};
+
+export default TableList;
