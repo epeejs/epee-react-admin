@@ -7,10 +7,10 @@ interface PrivateRouteProps extends RouteProps {
   authority?: Roles[];
 }
 
-export default function PrivateRoute({
+const PrivateRoute: React.FC<PrivateRouteProps> = ({
   authority,
   ...otherProps
-}: PrivateRouteProps) {
+}) => {
   const { role } = useStoreState(state => state.globalModel.userInfo);
 
   return authority && !authority.includes(role ?? Roles.Guest) ? (
@@ -18,4 +18,6 @@ export default function PrivateRoute({
   ) : (
     <Route {...otherProps} />
   );
-}
+};
+
+export default PrivateRoute;

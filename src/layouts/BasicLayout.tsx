@@ -13,12 +13,12 @@ interface BasicLayoutProps extends RouterLayoutType {
   child: React.ComponentType<any>;
 }
 
-export default function BasicLayout({
+const BasicLayout: React.FC<BasicLayoutProps> = ({
   router,
   history,
   location: { pathname },
   child,
-}: BasicLayoutProps) {
+}) => {
   const openKey = '/' + pathname.split('/')[1];
 
   return (
@@ -105,4 +105,6 @@ export default function BasicLayout({
       </Content>
     </Layout>
   );
-}
+};
+
+export default BasicLayout;

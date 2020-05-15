@@ -5,7 +5,7 @@ import styles from './SettingLayout.module.scss';
 
 const { TabPane } = Tabs;
 
-export default function SettingLayout(props: RouterLayoutType) {
+const SettingLayout: React.FC<RouterLayoutType> = props => {
   return (
     <div className={styles.wrap}>
       <Tabs
@@ -21,4 +21,6 @@ export default function SettingLayout(props: RouterLayoutType) {
       </Tabs>
     </div>
   );
-}
+};
+
+export default SettingLayout;

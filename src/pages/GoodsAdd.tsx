@@ -7,7 +7,7 @@ interface GoodsAddProps extends RouteComponentProps {
   [key: string]: any;
 }
 
-export default function GoodsAdd(props: GoodsAddProps) {
+const GoodsAdd: React.FC<GoodsAddProps> = props => {
   return (
     <PageHeader
       className={styles.wrap}
@@ -17,4 +17,6 @@ export default function GoodsAdd(props: GoodsAddProps) {
       Content
     </PageHeader>
   );
-}
+};
+
+export default GoodsAdd;

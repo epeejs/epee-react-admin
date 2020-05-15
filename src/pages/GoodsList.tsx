@@ -8,7 +8,7 @@ interface GoodsListProps extends RouteComponentProps {
   [key: string]: any;
 }
 
-export default function GoodsList(props: GoodsListProps) {
+const GoodsList: React.FC<GoodsListProps> = props => {
   return (
     <div className={styles.wrap}>
       <div className={styles.header}>
@@ -21,4 +21,6 @@ export default function GoodsList(props: GoodsListProps) {
       <div className={styles.body}>Content</div>
     </div>
   );
-}
+};
+
+export default GoodsList;

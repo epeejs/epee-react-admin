@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './index.module.scss';
 
-export default function HomeHeader() {
+const HomeHeader: React.FC = () => {
   return (
     <>
       <Dropdown
@@ -27,4 +27,6 @@ export default function HomeHeader() {
       </Dropdown>
     </>
   );
-}
+};
+
+export default HomeHeader;
