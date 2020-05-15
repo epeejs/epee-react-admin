@@ -13,7 +13,7 @@ interface HomeHeaderProps {
   [key: string]: any;
 }
 
-export default function HomeHeader(props: HomeHeaderProps) {
+const HomeHeader: React.FC<HomeHeaderProps> = props => {
   const { collapseMenu, userInfo } = useStoreState(state => state.globalModel);
   const setCollapseMenu = useStoreActions(
     actions => actions.globalModel.setCollapseMenu,
@@ -54,4 +54,6 @@ export default function HomeHeader(props: HomeHeaderProps) {
       </Dropdown>
     </div>
   );
-}
+};
+
+export default HomeHeader;

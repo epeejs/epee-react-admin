@@ -51,13 +51,15 @@
       "  [key: string]: any;",
       "}",
       "",
-      "export default function ${1:${TM_FILENAME_BASE}}(props: ${1:${TM_FILENAME_BASE}}Props) {",
+      "const ${1:${TM_FILENAME_BASE}}: React.FC<${1:${TM_FILENAME_BASE}}Props> = () => {",
       "  return (",
       "    <div className={styles.wrap}>",
       "      ${0}",
       "    </div>",
       "  );",
-      "}"
+      "};",
+      "",
+      "export default ${1:${TM_FILENAME_BASE}};"
     ]
   },
   "easy-peasy action": {

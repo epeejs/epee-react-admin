@@ -219,7 +219,7 @@ export const storeModel: StoreModel = {
 ```tsx
 import { useStoreActions, useStoreState } from 'src/hooks';
 
-export default function TableList(props: TableListProps) {
+const TableList: React.FC<TableListProps> = props => {
   // 快捷键：cus
   const {
     data: { total, list },
@@ -260,7 +260,7 @@ export default function TableList(props: TableListProps) {
       />
     </div>
   );
-}
+};
 ```
 
 ### 公共业务组件
