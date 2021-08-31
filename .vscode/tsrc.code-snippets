@@ -15,37 +15,12 @@
   // 	],
   // 	"description": "Log output to console"
   // }
-  "react ts model": {
-    "scope": "typescript",
-    "prefix": "tsmodel",
-    "body": [
-      "",
-      "export interface ${1:${TM_FILENAME_BASE/(.*)\\.model/${1:/capitalize}/}}Model {",
-      "  [key: string]: any;",
-      "}",
-      "",
-      "export const ${2:${TM_FILENAME_BASE/(.*)\\.model/${1}/}}Model: ${1:${TM_FILENAME_BASE/(.*)\\.model/${1:/capitalize}/}}Model = {",
-      "  $0",
-      "}"
-    ]
-  },
-  "request": {
-    "scope": "typescript",
-    "prefix": "tsreq",
-    "body": [
-      "import { Api } from 'src/constants/Api';",
-      "import request from 'src/utils/request';",
-      "",
-      "export const ${1:functionName} = () =>",
-      "  request<ResponseBody<any>>(Api);"
-    ]
-  },
   "ts react function component": {
     "scope": "typescriptreact",
     "prefix": "tsrfc",
     "body": [
       "import React from 'react';",
-      "import styles from './${1:${TM_FILENAME_BASE}}.module.scss';",
+      "import styles from './${1:${TM_FILENAME_BASE}}.module.less';",
       "",
       "interface ${1:${TM_FILENAME_BASE}}Props {",
       "  [key: string]: any;",
@@ -61,30 +36,6 @@
       "",
       "export default ${1:${TM_FILENAME_BASE}};"
     ]
-  },
-  "easy-peasy action": {
-    "scope": "typescript,javascript",
-    "prefix": "act",
-    "body": ["action((state, payload) => {", "  ${0}", "}),"]
-  },
-  "easy-peasy thunk": {
-    "scope": "typescript,javascript",
-    "prefix": "thunk",
-    "body": [
-      "thunk(async (actions, payload, { getState }) => {",
-      "  ${0}",
-      "}),"
-    ]
-  },
-  "const {} = useStoreState": {
-    "scope": "typescriptreact",
-    "prefix": "cus",
-    "body": ["const { $0 } = useStoreState(state => state.$1);"]
-  },
-  "const {} = useStoreActions": {
-    "scope": "typescriptreact",
-    "prefix": "cua",
-    "body": ["const { $0 } = useStoreActions(actions => actions.$1);"]
   },
   "const {} = object": {
     "scope": "typescriptreact,typescript,javascript",

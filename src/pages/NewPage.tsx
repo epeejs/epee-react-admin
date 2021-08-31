@@ -2,23 +2,20 @@ import { Button } from 'antd';
 import classNames from 'classnames';
 import _ from 'lodash';
 import moment from 'moment';
-import React, { useRef, useState } from 'react';
-import { useEffectOnce } from 'react-use';
+import { useEffect, useRef, useState } from 'react';
 import { useUpdateTime } from 'src/hooks/useUpdateTime';
-import styles from './NewPage.module.scss';
+import styles from './NewPage.module.less';
 
-interface NewPageProps {
-  [key: string]: any;
-}
+type NewPageProps = Record<string, any>;
 
 let top = 0;
 const loadDate = moment();
 
-export default function NewPage(props: NewPageProps) {
+const NewPage: React.FC<NewPageProps> = () => {
   const ref = useRef<HTMLDivElement | null>(null);
   const [hidden, setHidden] = useState(false);
 
-  useEffectOnce(() => {
+  useEffect(() => {
     if (ref.current) {
       ref.current.scrollTop = top;
     }
@@ -28,14 +25,14 @@ export default function NewPage(props: NewPageProps) {
         top = ref.current.scrollTop;
       }
     };
-  });
+  }, []);
   useUpdateTime();
 
   return (
     <div className={styles.wrap} ref={ref}>
       <Button
         onClick={() => {
-          setHidden(value => !value);
+          setHidden((value) => !value);
         }}
       >
         显示/隐藏
@@ -44,10 +41,12 @@ export default function NewPage(props: NewPageProps) {
         距上次更新时间：{loadDate.fromNow()}
       </p>
       <ul>
-        {_.range(200).map(v => (
+        {_.range(200).map((v) => (
           <li key={v}>{v}</li>
         ))}
       </ul>
     </div>
   );
-}
+};
+
+export default NewPage;

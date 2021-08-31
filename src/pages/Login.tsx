@@ -1,30 +1,16 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input, message } from 'antd';
+import type { LRouteComponentProps } from '@epeejs/pro-layout/es/type';
+import { Button, Checkbox, Form, Input } from 'antd';
 import React from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import { useMount } from 'react-use';
-import styles from './Login.module.scss';
+import styles from './Login.module.less';
 
-interface LoginProps extends RouteComponentProps {
-  [key: string]: any;
-}
-
-const Login: React.FC<LoginProps> = ({ history }) => {
-  useMount(() => {
-    const code = sessionStorage.getItem('code');
-
-    if (code === '401') {
-      message.error('身份信息已过期或权限不足，请重新登录！');
-      sessionStorage.clear();
-    }
-  });
-
+const Login: React.FC<LRouteComponentProps> = ({ history }) => {
   return (
     <div className={styles.wrap}>
       <Form
         className={styles.login_form}
         initialValues={{ remember: true }}
-        onFinish={values => {
+        onFinish={(values) => {
           // eslint-disable-next-line no-console
           console.log('Received values of form: ', values);
         }}
@@ -57,12 +43,7 @@ const Login: React.FC<LoginProps> = ({ history }) => {
         </Form.Item>
 
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            block
-            onClick={() => history.replace('/')}
-          >
+          <Button type="primary" htmlType="submit" block onClick={() => history.replace('/')}>
             Log in
           </Button>
           Or <a href="/login">register now!</a>

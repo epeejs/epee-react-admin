@@ -1,14 +1,11 @@
 /** 获取图片base64格式 */
-export function imgToBase64(
-  url: string,
-  callback: (result: string | ArrayBuffer | null) => void,
-) {
+export function imgToBase64(url: string, callback: (result: string | ArrayBuffer | null) => void) {
   const xhr = new XMLHttpRequest();
 
-  xhr.onload = function() {
+  xhr.onload = () => {
     const reader = new FileReader();
 
-    reader.onloadend = function() {
+    reader.onloadend = () => {
       callback(reader.result);
     };
 

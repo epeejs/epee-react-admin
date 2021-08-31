@@ -1,11 +1,7 @@
-import { createTypedHooks } from 'easy-peasy';
-import { StoreModel } from 'src/models';
+import type { TypedUseSelectorHook } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import type { AppDispatch, RootState } from '../store';
 
-// Provide our model to the helper      👇
-const typedHooks = createTypedHooks<StoreModel>();
-
-// 👇 export the typed hooks
-export const useStoreActions = typedHooks.useStoreActions;
-export const useStoreDispatch = typedHooks.useStoreDispatch;
-export const useStoreState = typedHooks.useStoreState;
-export const useStore = typedHooks.useStore;
+// Use throughout your app instead of plain `useDispatch` and `useSelector`
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

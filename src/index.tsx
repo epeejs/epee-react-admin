@@ -1,32 +1,28 @@
+import { RouteLayout } from '@epeejs/pro-layout';
 import { ConfigProvider, message } from 'antd';
-import 'antd/dist/antd.css';
-import zhCN from 'antd/lib/locale/zh_CN';
-import { StoreProvider } from 'easy-peasy';
-import moment from 'moment';
+import zhCN from 'antd/es/locale/zh_CN';
 import 'moment/locale/zh-cn';
-import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { router } from './constants/router';
-import { store } from './constants/store';
-import RouterLayout from './layouts/RouterLayout';
-import './style/global.css';
+import 'regenerator-runtime/runtime';
+import { routes } from './config/routes';
+import './index.less';
+import store from './store';
 import request from './utils/request';
 
-moment.locale('zh-cn');
-request.interceptors.response = async function(response) {
-  const res: ResponseBody<any> = await response.json();
+request.default.baseURL = 'https://www.fastmock.site/mock/e24cdafccdc310a5f728225e4e0fa69f/epee';
+request.interceptors.response = async (response) => {
+  const res: ResponseData = await response.json();
 
   if (!res.code) {
-    return res;
-  } else {
-    // eslint-disable-next-line
-    throw { statusText: res.data, url: response.url, res };
+    return res.data;
   }
+  // eslint-disable-next-line @typescript-eslint/no-throw-literal
+  throw { statusText: res.data, url: response.url, res };
 };
-request.interceptors.catch = function(error) {
+request.interceptors.catch = (error) => {
   if (error.status === 401) {
-    sessionStorage.setItem('code', '401');
     window.location.href = '/login';
     return;
   }
@@ -36,11 +32,11 @@ request.interceptors.catch = function(error) {
 
 ReactDOM.render(
   <ConfigProvider locale={zhCN}>
-    <StoreProvider store={store}>
+    <Provider store={store}>
       <Router>
-        <RouterLayout router={router} />
+        <RouteLayout routes={routes} />
       </Router>
-    </StoreProvider>
+    </Provider>
   </ConfigProvider>,
   document.getElementById('root'),
 );
