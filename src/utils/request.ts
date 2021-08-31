@@ -1,51 +1,56 @@
+/* eslint-disable */
 import _ from 'lodash';
 import 'whatwg-fetch';
 
-export interface ReqInit extends RequestInit {
+export interface ReqInit extends Omit<RequestInit, 'body'> {
   headers?: Record<string, string>;
   /** eg. ?a=1 */
-  params?: { [key: string]: any };
+  params?: Record<string, any>;
   /** eg. /:id/.. */
-  router?: { [key: string]: any };
+  router?: Record<string, any>;
   /** 超时时间，默认3000 */
   timeout?: number;
+  baseURL?: string;
+  body?: Record<keyof any, any> | RequestInit['body'];
 }
 
-async function request<T = unknown>(
-  path: string,
-  init: ReqInit = {},
-): Promise<T> {
+async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
   const mergeInit = {
     ...request.default,
     ...init,
     headers: { ...request.default.headers, ...init.headers },
   };
-  const { params, router, body, timeout, headers } = mergeInit;
-  const hasType =
-    Reflect.has(headers, 'Content-Type') ||
-    Reflect.has(headers, 'content-type');
+  const { params, router, timeout, headers, baseURL, ...restOptions } = mergeInit;
+  const hasType = Reflect.has(headers, 'Content-Type') || Reflect.has(headers, 'content-type');
   let url = path;
+  let _body: any = mergeInit.body;
+  const _method = _.capitalize(mergeInit.method);
 
+  // 路由参数
   if (router) {
     url = path.replace(/:([A-Za-z]+)/g, (substring, p1: string) => router[p1]);
   }
+  // 查询参数
   if (params) {
-    url += _(
-      _.reduce(params, (prev, val, key) => `${prev}${key}=${val}&`, '?'),
-    ).trimEnd('&');
+    url += _(_.reduce(params, (prev, val, key) => `${prev}${key}=${val}&`, '?')).trimEnd('&');
   }
-  if (!hasType && typeof body === 'string') {
+  // body
+  if (!hasType && _method !== 'get') {
+    if (_.isPlainObject(_body)) {
+      _body = JSON.stringify(_body);
+    }
     Reflect.set(headers, 'Content-Type', 'application/json');
   }
 
   try {
     const response: Response = await Promise.race([
-      fetch(url, mergeInit),
+      fetch(baseURL ? `${baseURL}/${_.trimStart(url, '/')}` : url, {
+        ...restOptions,
+        body: _body,
+        headers,
+      }),
       new Promise<any>((resolve, reject) => {
-        setTimeout(
-          () => reject({ status: 408, statusText: 'TIME_OUT_ERR', url }),
-          timeout,
-        );
+        setTimeout(() => reject({ status: 408, statusText: 'TIME_OUT_ERR', url }), timeout);
       }),
     ]);
 
@@ -80,7 +85,7 @@ request.interceptors = {
   catch: null,
 } as {
   response: ((response: Response) => Promise<any>) | null;
-  catch: ((error: Partial<Response>) => void) | null;
+  catch: ((error: any) => void) | null;
 };
 
 export default request;

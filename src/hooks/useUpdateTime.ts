@@ -1,4 +1,4 @@
-import { useInterval, useUpdate } from 'react-use';
+import { useInterval, useUpdate } from 'ahooks';
 
 export function useUpdateTime() {
   const update = useUpdate();

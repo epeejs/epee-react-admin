@@ -1,0 +1,20 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 24px 24px 0;
+  overflow: auto;
+
+  .tip {
+    flex-shrink: 0;
+    height: 64px;
+    overflow: hidden;
+    line-height: 64px;
+    background-color: lightgray;
+    transition: all 0.3s;
+
+    &.hidden {
+      height: 0;
+    }
+  }
+}

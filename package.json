@@ -1,75 +1,48 @@
 {
-  "name": "epee-react-admin-ts",
+  "name": "epee-react-admin",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@ant-design/icons": "^4.0.6",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/classnames": "^2.2.9",
-    "@types/echarts": "^4.1.12",
-    "@types/jest": "^24.0.0",
-    "@types/lodash": "^4.14.134",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
-    "@types/react-router-dom": "^5.1.0",
-    "@types/redux-logger": "^3.0.7",
-    "antd": "^4.2.2",
-    "classnames": "^2.2.6",
-    "easy-peasy": "^3.3.0",
-    "echarts": "^4.3.0",
-    "husky": "^2.4.1",
-    "lint-staged": "^8.2.1",
-    "lodash": "^4.17.14",
-    "moment": "^2.24.0",
-    "node-sass": "^4.13.0",
-    "prettier": "^1.18.2",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.1",
-    "react-use": "^13.26.1",
+    "@epeejs/pro-layout": "^0.6.2",
+    "@reduxjs/toolkit": "^1.6.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/lodash": "^4.14.170",
+    "@types/md5": "^2.3.0",
+    "@types/node": "^15.0.2",
+    "@types/react": "^17.0.5",
+    "@types/react-dom": "^17.0.3",
+    "@types/react-redux": "^7.1.16",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/redux-logger": "^3.0.8",
+    "@umijs/fabric": "^2.6.2",
+    "ahooks": "^2.10.9",
+    "antd": "^4.16.13",
+    "babel-plugin-import": "^1.13.3",
+    "classnames": "^2.3.1",
+    "customize-cra": "^1.0.0",
+    "lodash": "^4.17.21",
+    "md5": "^2.3.0",
+    "react": "^17.0.2",
+    "react-app-rewired": "^2.1.8",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
     "redux-logger": "^3.0.6",
-    "stylelint": "^11.0.0",
-    "stylelint-config-css-modules": "^1.5.0",
-    "stylelint-config-prettier": "^6.0.0",
-    "stylelint-config-rational-order": "^0.1.2",
-    "stylelint-config-standard": "^19.0.0",
-    "stylelint-order": "^3.1.1",
-    "typescript": "~3.7.2",
-    "whatwg-fetch": "^3.0.0"
+    "typescript": "^4.2.4",
+    "whatwg-fetch": "^3.6.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "prettier": "prettier -c --write '**/*'",
     "docker:build": "docker build . -t epee-react-admin",
     "docker:up": "docker-compose -f ./docker/docker-compose.yml up -d"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{scss,less,css}": [
-      "stylelint --fix",
-      "git add"
-    ],
-    "src/**/*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "**/*.{json,ts,tsx,js,jsx,md,scss,less,css,html}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -82,5 +55,17 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "husky": ">=6",
+    "less": "^4.1.1",
+    "less-loader": "^7.3.0",
+    "lint-staged": ">=10",
+    "prettier": "^2.3.1"
+  },
+  "lint-staged": {
+    "**/*.{scss,less,css}": "stylelint --fix",
+    "src/**/*.{js,jsx,ts,tsx}": "eslint --fix",
+    "*.{json,ts,tsx,js,jsx,md,scss,less,css,html}": "prettier --write"
   }
 }
