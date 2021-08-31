@@ -5,7 +5,6 @@ import 'moment/locale/zh-cn';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import 'regenerator-runtime/runtime';
 import { routes } from './config/routes';
 import './index.less';
 import store from './store';
