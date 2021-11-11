@@ -1431,10 +1431,10 @@
   resolved "https://registry.nlark.com/@ctrl/tinycolor/download/@ctrl/tinycolor-3.4.0.tgz#c3c5ae543c897caa9c2a68630bed355be5f9990f"
   integrity sha1-w8WuVDyJfKqcKmhjC+01W+X5mQ8=
 
-"@epeejs/pro-layout@^0.6.2":
-  version "0.6.2"
-  resolved "https://registry.nlark.com/@epeejs/pro-layout/download/@epeejs/pro-layout-0.6.2.tgz#445dbca5ab765465c3e9851508605128e17f0b70"
-  integrity sha1-RF28pat2VGXD6YUVCGBRKOF/C3A=
+"@epeejs/pro-layout@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.npmmirror.com/@epeejs/pro-layout/download/@epeejs/pro-layout-1.0.0.tgz#9292d562335a5e269efc5c93f6e5154cf3107082"
+  integrity sha1-kpLVYjNaXiae/FyT9uUVTPMQcII=
   dependencies:
     classnames "^2.3.1"
     lodash "^4.17.21"

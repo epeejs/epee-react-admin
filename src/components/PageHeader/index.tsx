@@ -1,6 +1,7 @@
 import { PoweroffOutlined, UserOutlined } from '@ant-design/icons';
-import { Avatar, Dropdown, Layout, Menu } from 'antd';
+import { Avatar, Divider, Dropdown, Layout, Menu } from 'antd';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from 'src/hooks';
 import styles from './index.module.less';
 
@@ -9,15 +10,15 @@ type PageHeaderProps = Record<string, any>;
 const { Header } = Layout;
 
 const PageHeader: React.FC<PageHeaderProps> = () => {
-  // const { collapseMenu, userInfo } = useStoreState((state) => state.globalModel);
-  // const setCollapseMenu = useStoreActions((actions) => actions.globalModel.setCollapseMenu);
   const userInfo = useAppSelector((state) => state.login.userInfo);
 
   return (
     <Header className={styles.wrap}>
-      {/* <span className={styles.btn_toggle} onClick={() => setCollapseMenu(!collapseMenu)}>
-        {collapseMenu ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-      </span> */}
+      <div className={styles.left}>
+        <Link className={styles.logo} to="/" />
+        <Divider type="vertical" style={{ height: 20 }} />
+        <span>Epee Admin</span>
+      </div>
 
       <Dropdown
         className={styles.pop}

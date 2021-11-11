@@ -1,4 +1,8 @@
 .wrap {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+
   .btn_toggle {
     display: flex;
     font-size: 20px;
@@ -11,7 +15,6 @@
     width: 80px;
     margin-left: 12px;
     overflow: hidden;
-    color: #616773;
     white-space: nowrap;
     text-overflow: ellipsis;
     word-break: keep-all;
@@ -20,5 +23,21 @@
   .pop_trigger {
     display: flex;
     align-items: center;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+
+    > span {
+      font-size: 18px;
+    }
+  }
+
+  .logo {
+    width: 30px;
+    height: 30px;
+    background: url('../../assets/images/logo.png') no-repeat;
+    background-size: 100%;
   }
 }
