@@ -9,6 +9,7 @@
     "formulahendry.auto-close-tag",
     "formulahendry.auto-rename-tag",
     "clinyong.vscode-css-modules",
-    "quicktype.quicktype"
+    "quicktype.quicktype",
+    "dsznajder.es7-react-js-snippets"
   ]
 }
