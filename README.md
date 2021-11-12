@@ -1,4 +1,4 @@
-# epee react admin
+# epee-react-admin
 
 中后台应用模版，使用 CRA 作为基础模版搭建，简单、易扩展，且不限制技术栈
 
@@ -14,13 +14,13 @@
 
 - 基于布局模式开发
 - 根据路由配置生成菜单
-- antd 的按需加载
+- antd 主题及按需加载
 - 通用权限控制及路由 Hook
 - 支持 less css module
 - 提供常用布局组件
 - 严格的 lint 规则及提交检查
 
-## 技术栈
+## ✨ 技术栈
 
 react、antd、@reduxjs/toolkit、[@epeejs/pro-layout](https://github.com/epeejs/react-components/tree/main/packages/pro-layout)
 
@@ -129,6 +129,6 @@ export const routes: RouteConfig[] = [
 
 ## 布局与路由
 
-参考 [@epeejs/pro-layout](https://github.com/epeejs/react-components/tree/main/packages/pro-layout)使用文档
+参考 [@epeejs/pro-layout](https://github.com/epeejs/react-components/tree/main/packages/pro-layout) 使用文档
 
 ## 权限管理（待补充）
