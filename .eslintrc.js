@@ -8,7 +8,7 @@ module.exports = {
     'yield-star-spacing': ['warn', 'after'],
     'spaced-comment': ['warn', 'always', { markers: ['/'] }],
     'consistent-return': 'off',
-    'no-console': 0,
+    'no-console': 1,
     'no-param-reassign': 0,
     'react/jsx-key': 2,
   },
