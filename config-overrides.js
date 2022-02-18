@@ -1,5 +1,5 @@
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const { override, addLessLoader, addWebpackPlugin, addBabelPlugin } = require('customize-cra');
+const { override, addLessLoader, adjustStyleLoaders, addBabelPlugin } = require('customize-cra');
 
 module.exports = override(
   addBabelPlugin(['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]),
@@ -8,7 +8,7 @@ module.exports = override(
       lessOptions: {
         javascriptEnabled: true,
         modifyVars: {
-          hack: 'true; @import "./src/config/theme.less";',
+          'primary-color': '#286bff',
         },
       },
     },
@@ -16,4 +16,8 @@ module.exports = override(
       getLocalIdent: getCSSModuleLocalIdent,
     },
   ),
+  adjustStyleLoaders(({ use: [, , postcss] }) => {
+    const postcssOptions = postcss.options;
+    postcss.options = { postcssOptions };
+  }),
 );
