@@ -32,7 +32,10 @@ async function request<T = any>(path: string, init: ReqInit = {}): Promise<T> {
   }
   // 查询参数
   if (params) {
-    url += _(_.reduce(params, (prev, val, key) => `${prev}${key}=${val}&`, '?')).trimEnd('&');
+    url += _.trimEnd(
+      _.reduce(params, (prev, val, key) => `${prev}${key}=${val}&`, '?'),
+      '&',
+    );
   }
   // body
   if (!hasType && _method !== 'get') {
