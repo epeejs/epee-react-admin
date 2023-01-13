@@ -30,4 +30,12 @@ module.exports = override(
     postcss.options = { postcssOptions };
   }),
   process.env.ANALYZE ? addWebpackPlugin(new BundleAnalyzerPlugin()) : undefined,
+  (/** @type {import('webpack').Configuration} */ config) => {
+    config.stats = {
+      preset: config.stats,
+      timings: true,
+    };
+
+    return config;
+  },
 );
