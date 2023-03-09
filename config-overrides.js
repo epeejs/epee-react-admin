@@ -1,14 +1,23 @@
 const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent');
-const { override, addLessLoader, addWebpackPlugin, addBabelPlugin } = require('customize-cra');
+const {
+  override,
+  addLessLoader,
+  adjustStyleLoaders,
+  addBabelPlugin,
+  addWebpackPlugin,
+} = require('customize-cra');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = override(
   addBabelPlugin(['import', { libraryName: 'antd', libraryDirectory: 'es', style: true }]),
+  addBabelPlugin(['lodash']),
   addLessLoader(
     {
       lessOptions: {
         javascriptEnabled: true,
         modifyVars: {
-          hack: 'true; @import "./src/config/theme.less";',
+          'root-entry-name': 'variable',
+          'primary-color': '#286bff',
         },
       },
     },
@@ -16,4 +25,17 @@ module.exports = override(
       getLocalIdent: getCSSModuleLocalIdent,
     },
   ),
+  adjustStyleLoaders(({ use: [, , postcss] }) => {
+    const postcssOptions = postcss.options;
+    postcss.options = { postcssOptions };
+  }),
+  process.env.ANALYZE ? addWebpackPlugin(new BundleAnalyzerPlugin()) : undefined,
+  (/** @type {import('webpack').Configuration} */ config) => {
+    config.stats = {
+      preset: config.stats,
+      timings: true,
+    };
+
+    return config;
+  },
 );
