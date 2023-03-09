@@ -14,9 +14,9 @@ const store = configureStore({
   middleware: getDefaultMiddleware().concat(middleware),
 });
 
-if (process.env.NODE_ENV !== 'production' && module.hot) {
-  module.hot.accept('./rootReducer', () => store.replaceReducer(rootReducer));
-}
+// if (process.env.NODE_ENV !== 'production' && module.hot) {
+//   module.hot.accept('./rootReducer', () => store.replaceReducer(rootReducer));
+// }
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

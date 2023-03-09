@@ -1,0 +1,37 @@
+stages:
+  - test
+  - deploy
+
+.testTpl:
+  image: mcr.microsoft.com/playwright:v1.31.0-focal
+  stage: test
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: always
+
+test:
+  extends: .testTpl
+  script:
+    - 'yarn'
+    - 'yarn test:ci'
+    - 'yarn test:e2e:ci'
+  artifacts:
+    reports:
+      cobertura: coverage/cobertura-coverage.xml
+      junit:
+        - junit.xml
+        - je2e.xml
+    paths:
+      - coverage
+      - playwright-report
+
+pages:
+  extends: .testTpl
+  stage: deploy
+  dependencies:
+    - test
+  script:
+    - mv coverage/ public/
+  artifacts:
+    paths:
+      - public
