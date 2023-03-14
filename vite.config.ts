@@ -11,6 +11,9 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+        modifyVars: {
+          'root-entry-name': 'variable',
+        },
       },
     },
   },
