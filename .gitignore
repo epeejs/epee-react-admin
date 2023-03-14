@@ -29,3 +29,5 @@ je2e.xml
 /test-results/
 /playwright-report/
 /playwright/.cache/
+
+stats.html
