@@ -2,6 +2,10 @@
 
 中后台应用模版，使用 CRA 作为基础模版搭建，简单、易扩展，且不限制技术栈
 
+> 使用 webpack5 分支 [wp5](https://github.com/epeejs/epee-react-admin/tree/wp5)
+
+> 配合 CI 自动化测试更详细文档参考 [前端自动化测试](https://epeejs.github.io/daydayup/zjw/auto-test)
+
 ## 💡 预览
 
 水平布局 (master)：<https://epee.netlify.app/> ![hlayout](https://raw.githubusercontent.com/dobble11/aseets/master/hlayout.png)
